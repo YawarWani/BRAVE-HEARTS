@@ -1441,6 +1441,15 @@ img {
     align-items: center;
     justify-content: center;
     transition: var(--transition);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+}
+
+.whatsapp-sticky-btn.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
 }
 
 .whatsapp-sticky-btn i {
@@ -1457,6 +1466,9 @@ img {
 
 @media (max-width: 768px) {
     .whatsapp-sticky-btn {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
         bottom: 0;
         left: 0;
         width: 100%;

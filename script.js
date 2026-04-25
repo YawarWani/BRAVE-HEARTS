@@ -31,15 +31,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 3. Sticky Navbar & Back to Top Button ---
     const navbar = document.getElementById('navbar');
     const backToTopBtn = document.getElementById('backToTop');
+    const waStickyBtn = document.querySelector('.whatsapp-sticky-btn');
 
     window.addEventListener('scroll', () => {
         if (navbar && backToTopBtn) {
             if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
                 backToTopBtn.classList.add('show');
+                if (waStickyBtn) waStickyBtn.classList.add('show');
             } else {
                 navbar.classList.remove('scrolled');
                 backToTopBtn.classList.remove('show');
+                if (waStickyBtn) waStickyBtn.classList.remove('show');
             }
         }
         
