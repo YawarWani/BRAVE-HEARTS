@@ -62,7 +62,7 @@
         <div class="hero-bg">
             <!-- Mobile Image Background (Loads on screens < 768px) -->
             <img class="bg-img mobile-bg" src="images/hero-image.jpg" alt="Beautiful Kashmir">
-            
+
             <!-- Desktop Video Background (Loads on screens >= 768px) -->
             <video class="bg-img desktop-bg" autoplay loop muted playsinline>
                 <source src="videos/kashmir_hero.mp4" type="video/mp4">
@@ -76,10 +76,49 @@
             <div class="hero-btns">
                 <a href="#packages" class="btn btn-primary">Explore Packages</a>
                 <a href="#" id="openBookNowModal" class="btn btn-outline">Book Now</a>
-                <a href="https://wa.me/919876543210" target="_blank" class="btn btn-whatsapp" title="WhatsApp Us"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://wa.me/919876543210" target="_blank" class="btn btn-whatsapp" title="WhatsApp Us"><i
+                        class="fab fa-whatsapp"></i></a>
             </div>
         </div>
     </section>
+
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="container">
+            <div class="trust-items">
+                <div class="trust-item scroll-anim fade-in-up">
+                    <div class="trust-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div class="trust-text">
+                        <h4>Govt. Approved</h4>
+                        <p>J&K Tourism Dept. (<span
+                                style="color: #F59E0B; font-weight: bold; letter-spacing: 0.5px;">JKEA00004318</span>)
+                        </p>
+                    </div>
+                </div>
+                <div class="trust-item scroll-anim fade-in-up" style="transition-delay: 0.1s;">
+                    <div class="trust-icon"><i class="fas fa-star"></i></div>
+                    <div class="trust-text">
+                        <h4>5-Star Rated</h4>
+                        <p>Consistently loved by travelers</p>
+                    </div>
+                </div>
+                <div class="trust-item scroll-anim fade-in-up" style="transition-delay: 0.2s;">
+                    <div class="trust-icon"><i class="fas fa-user-tie"></i></div>
+                    <div class="trust-text">
+                        <h4>Local Experts</h4>
+                        <p>10+ years of Kashmir experience</p>
+                    </div>
+                </div>
+                <div class="trust-item scroll-anim fade-in-up" style="transition-delay: 0.3s;">
+                    <div class="trust-icon"><i class="fas fa-headset"></i></div>
+                    <div class="trust-text">
+                        <h4>24/7 Support</h4>
+                        <p>Always here when you need us</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- About Section -->
     <section id="about" class="about section-padding">
@@ -87,8 +126,11 @@
             <div class="about-grid">
                 <div class="about-text scroll-anim fade-in-left">
                     <h2 class="section-title">Discover the Magic of <span>Kashmir</span></h2>
-                    <p class="lead-text">Brave Hearts Tour & Travels is your trusted companion in exploring the
-                        mesmerizing beauty of the Kashmir Valley.</p>
+                    <p class="lead-text">Brave Hearts Tour & Travels is an officially recognized and trusted Excursion
+                        Agent, proudly registered with the Department of Tourism, Government of Jammu and Kashmir (Reg:
+                        <span
+                            style="color: var(--primary); font-weight: 700; background: rgba(15, 118, 110, 0.1); padding: 2px 6px; border-radius: 4px;">JKEA00004318</span>).
+                    </p>
                     <p>With years of experience in curating premium travel experiences, we believe in creating memories
                         that last a lifetime. Whether you seek the serene waters of Dal Lake, the snow-capped peaks of
                         Gulmarg, or the lush green meadows of Pahalgam, we provide luxurious, comfortable, and
@@ -319,7 +361,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="text-center" style="margin-top: 50px;">
                 <a href="gallery.html" class="btn btn-primary">View Full Gallery</a>
             </div>
@@ -422,6 +464,19 @@
                     </a>
                     <p>Your ultimate companion in exploring the breathtaking beauty of Kashmir. We provide premium,
                         luxurious, and hassle-free travel experiences.</p>
+                    <div class="footer-trust"
+                        style="margin-top: 20px; margin-bottom: 20px; padding: 12px; background: rgba(255,255,255,0.05); border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); display: inline-block;">
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <i class="fas fa-shield-alt" style="color: #10B981; font-size: 1.5rem;"></i>
+                            <div style="text-align: left;">
+                                <h4 style="color: #fff; font-size: 0.95rem; margin-bottom: 2px;">Govt. Approved
+                                    Excursion Agent</h4>
+                                <p style="color: #cbd5e1; font-size: 0.8rem; margin: 0;">J&K Tourism Dept. (Reg: <span
+                                        style="color: #F59E0B; font-weight: bold; letter-spacing: 0.5px;">JKEA00004318</span>)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
@@ -499,19 +554,25 @@
 
     <!-- Book Now Modal -->
     <div id="bookNowModal" class="package-modal">
-        <div class="modal-content glass-effect" style="max-width: 450px; margin: auto; border-radius: var(--border-radius); padding: 30px;">
+        <div class="modal-content glass-effect"
+            style="max-width: 450px; margin: auto; border-radius: var(--border-radius); padding: 30px;">
             <span class="close-modal" id="closeBookNowModal" style="top: 15px; right: 15px;">&times;</span>
             <div class="modal-details" style="padding: 10px 0 0 0;">
                 <h2 style="margin-bottom: 20px; font-size: 1.8rem; text-align: center;">Request a Callback</h2>
                 <form id="bookNowForm" class="contact-form">
                     <div class="form-group" style="margin-bottom: 15px;">
-                        <input type="text" id="bnName" placeholder="Your Name" required style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px;">
+                        <input type="text" id="bnName" placeholder="Your Name" required
+                            style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px;">
                     </div>
                     <div class="form-group" style="margin-bottom: 20px;">
-                        <input type="tel" id="bnPhone" placeholder="Contact Number" required style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px;">
+                        <input type="tel" id="bnPhone" placeholder="Contact Number" required
+                            style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px;">
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block" style="padding: 12px;">Request a Callback</button>
-                    <div id="bnSuccessMsg" style="display: none; color: #10B981; font-weight: 600; margin-top: 15px; text-align: center;">We will reach you shortly.</div>
+                    <button type="submit" class="btn btn-primary btn-block" style="padding: 12px;">Request a
+                        Callback</button>
+                    <div id="bnSuccessMsg"
+                        style="display: none; color: #10B981; font-weight: 600; margin-top: 15px; text-align: center;">
+                        We will reach you shortly.</div>
                 </form>
             </div>
         </div>
