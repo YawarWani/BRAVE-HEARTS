@@ -54,11 +54,10 @@
     <section id="home" class="hero">
         <div class="hero-bg">
             <!-- Mobile Image Background (Loads on screens < 768px) -->
-            <img class="bg-img mobile-bg" src="images/hero-image.jpg" alt="Beautiful Kashmir" onerror="this.src='https://images.unsplash.com/photo-1598091383021-15ddea10925d?auto=format&fit=crop&w=1600&q=80'">
+            <img class="bg-img mobile-bg" src="images/hero-image.jpg" alt="Beautiful Kashmir">
             
             <!-- Desktop Video Background (Loads on screens >= 768px) -->
-            <video class="bg-img desktop-bg" autoplay loop muted playsinline
-                poster="https://images.unsplash.com/photo-1598091383021-15ddea10925d?auto=format&fit=crop&w=1600&q=80">
+            <video class="bg-img desktop-bg" autoplay loop muted playsinline>
                 <source src="videos/kashmir_hero.mp4" type="video/mp4">
                 Your browser does not support the video tag.
             </video>
@@ -175,7 +174,7 @@
                 <p>Choose from our handpicked tour packages designed for every kind of traveler.</p>
             </div>
 
-            <div class="packages-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));">
+            <div class="packages-grid" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));">
                 <!-- Group Package 1: 30 Persons -->
                 <div class="package-card scroll-anim fade-in-up" style="transition-delay: 0.1s;">
                     <div class="card-img">

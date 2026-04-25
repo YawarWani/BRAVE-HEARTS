@@ -463,7 +463,7 @@ img {
    ========================================================================== */
 .packages-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
     gap: 30px;
 }
 
@@ -582,7 +582,7 @@ img {
 
 .stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
     gap: 30px;
     text-align: center;
 }
@@ -617,7 +617,7 @@ img {
    ========================================================================== */
 .gallery-masonry {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
     grid-auto-rows: 250px;
     gap: 20px;
     grid-auto-flow: dense;
@@ -1067,8 +1067,12 @@ img {
     }
     
     .experience-badge {
-        right: 0;
-        bottom: 0;
+        right: 10px;
+        bottom: 10px;
+        padding: 15px;
+    }
+    .experience-badge .number {
+        font-size: 1.8rem;
     }
 
     .footer-grid {
@@ -1098,6 +1102,8 @@ img {
         transition: 0.5s;
         box-shadow: -5px 0 15px rgba(0,0,0,0.1);
         padding: 0;
+        z-index: 1000;
+        display: flex;
     }
 
     .nav-menu.active {
@@ -1426,7 +1432,7 @@ img {
         left: 0;
         width: 100%;
         border-radius: 0;
-        padding: 16px;
+        padding: 10px 16px;
         box-shadow: 0 -4px 15px rgba(0,0,0,0.2);
     }
     
@@ -1443,7 +1449,11 @@ img {
     }
     
     .back-to-top {
-        bottom: 80px !important; /* Move back-to-top button up so it's not covered by the sticky button */
+        bottom: 70px !important; /* Move back-to-top button up so it's not covered by the sticky button */
+    }
+    
+    .about-features {
+        grid-template-columns: 1fr;
     }
 }
 
@@ -1452,7 +1462,7 @@ img {
    ========================================================================== */
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
     gap: 30px;
     margin-top: 40px;
 }

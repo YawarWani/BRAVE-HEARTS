@@ -1,64 +1,79 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     // --- 1. Set Current Year in Footer ---
-    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    const currentYearEl = document.getElementById('currentYear');
+    if (currentYearEl) {
+        currentYearEl.textContent = new Date().getFullYear();
+    }
 
     // --- 2. Mobile Menu Toggle ---
     const mobileMenu = document.getElementById('mobile-menu');
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
 
-    mobileMenu.addEventListener('click', () => {
-        mobileMenu.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
-
-    // Close mobile menu when a link is clicked
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-            navMenu.classList.remove('active');
+    if (mobileMenu && navMenu) {
+        mobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            navMenu.classList.toggle('active');
         });
-    });
+
+        // Close mobile menu when a link is clicked
+        if (navLinks) {
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+        }
+    }
 
     // --- 3. Sticky Navbar & Back to Top Button ---
     const navbar = document.getElementById('navbar');
     const backToTopBtn = document.getElementById('backToTop');
 
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add('scrolled');
-            backToTopBtn.classList.add('show');
-        } else {
-            navbar.classList.remove('scrolled');
-            backToTopBtn.classList.remove('show');
+        if (navbar && backToTopBtn) {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+                backToTopBtn.classList.add('show');
+            } else {
+                navbar.classList.remove('scrolled');
+                backToTopBtn.classList.remove('show');
+            }
         }
         
         // Active link switching based on scroll position
         let current = '';
         const sections = document.querySelectorAll('section');
         
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            if (scrollY >= sectionTop - 100) {
-                current = section.getAttribute('id');
-            }
-        });
+        if (sections) {
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 100) {
+                    current = section.getAttribute('id');
+                }
+            });
+        }
 
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href').includes(current)) {
-                link.classList.add('active');
-            }
-        });
+        if (navLinks) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (current && link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
+                }
+            });
+        }
     });
 
-    backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+    if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
-    });
+    }
 
     // --- 4. Scroll Animations (Intersection Observer) ---
     const scrollElements = document.querySelectorAll('.scroll-anim');
@@ -91,27 +106,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightboxCaption = document.getElementById('lightbox-caption');
     const closeLightbox = document.querySelector('.close-lightbox');
 
-    galleryItems.forEach(item => {
-        item.parentElement.addEventListener('click', () => {
-            lightbox.style.display = "block";
-            lightboxImg.src = item.src;
-            lightboxCaption.innerHTML = item.nextElementSibling.querySelector('span').innerHTML;
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
+    if (galleryItems && lightbox && lightboxImg && lightboxCaption) {
+        galleryItems.forEach(item => {
+            item.parentElement.addEventListener('click', () => {
+                lightbox.style.display = "block";
+                lightboxImg.src = item.src;
+                lightboxCaption.innerHTML = item.nextElementSibling.querySelector('span').innerHTML;
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            });
         });
-    });
+    }
 
-    closeLightbox.addEventListener('click', () => {
-        lightbox.style.display = "none";
-        document.body.style.overflow = 'auto'; // Restore scrolling
-    });
+    if (closeLightbox) {
+        closeLightbox.addEventListener('click', () => {
+            lightbox.style.display = "none";
+            document.body.style.overflow = 'auto'; // Restore scrolling
+        });
+    }
 
     // Close lightbox on click outside image
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-            lightbox.style.display = "none";
-            document.body.style.overflow = 'auto';
-        }
-    });
+    if (lightbox) {
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = "none";
+                document.body.style.overflow = 'auto';
+            }
+        });
+    }
 
     // --- 6. Stats Counter Animation ---
     const counters = document.querySelectorAll('.counter');
@@ -544,7 +565,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 12. Mobile Hero Background Slider ---
     const heroSection = document.getElementById('home');
-    if (heroSection) {
+    const mobileImgElement = document.querySelector('.mobile-bg');
+    
+    if (heroSection && mobileImgElement) {
         // You can add your mobile-only hero images here!
         const mobileImages = [
             'hero_images/1.jpg',
@@ -554,15 +577,21 @@ document.addEventListener('DOMContentLoaded', () => {
         ];
         
         let currentBgIndex = 0;
+
+        // Set initial image immediately on load for mobile
+        if (window.innerWidth <= 768) {
+            mobileImgElement.src = mobileImages[0];
+        }
         
         function rotateHeroBackground() {
             if (window.innerWidth <= 768) {
                 currentBgIndex = (currentBgIndex + 1) % mobileImages.length;
-                heroSection.style.transition = 'background-image 1.5s ease-in-out';
-                heroSection.style.backgroundImage = `linear-gradient(rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.7)), url('${mobileImages[currentBgIndex]}')`;
-            } else {
-                // Reset to default css if resizing back to desktop
-                heroSection.style.backgroundImage = '';
+                mobileImgElement.style.transition = 'opacity 0.5s ease-in-out';
+                mobileImgElement.style.opacity = 0.5;
+                setTimeout(() => {
+                    mobileImgElement.src = mobileImages[currentBgIndex];
+                    mobileImgElement.style.opacity = 1;
+                }, 500);
             }
         }
 
