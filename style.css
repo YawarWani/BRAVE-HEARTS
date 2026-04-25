@@ -1097,6 +1097,7 @@ img {
         align-items: center;
         transition: 0.5s;
         box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        padding: 0;
     }
 
     .nav-menu.active {

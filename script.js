@@ -541,4 +541,31 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 1500);
         });
     }
+
+    // --- 12. Mobile Hero Background Slider ---
+    const heroSection = document.getElementById('home');
+    if (heroSection) {
+        // You can add your mobile-only hero images here!
+        const mobileImages = [
+            'hero_images/mobile1.jpg',
+            'hero_images/mobile2.jpg',
+            'hero_images/mobile3.jpg'
+        ];
+        
+        let currentBgIndex = 0;
+        
+        function rotateHeroBackground() {
+            if (window.innerWidth <= 768) {
+                currentBgIndex = (currentBgIndex + 1) % mobileImages.length;
+                heroSection.style.transition = 'background-image 1.5s ease-in-out';
+                heroSection.style.backgroundImage = `linear-gradient(rgba(15, 23, 42, 0.4), rgba(15, 23, 42, 0.7)), url('${mobileImages[currentBgIndex]}')`;
+            } else {
+                // Reset to default css if resizing back to desktop
+                heroSection.style.backgroundImage = '';
+            }
+        }
+
+        // Change image every 4 seconds
+        setInterval(rotateHeroBackground, 4000);
+    }
 });
