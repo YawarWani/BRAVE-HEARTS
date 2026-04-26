@@ -252,6 +252,7 @@ img {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    position: relative;
 }
 
 .logo {
@@ -284,21 +285,49 @@ img {
     margin-left: 20px;
 }
 
+@media (min-width: 769px) {
+    .logo {
+        margin-right: 0 !important;
+    }
+    .header-socials {
+        position: static;
+        margin-left: 20px;
+        margin-right: auto;
+        order: 1;
+    }
+    .nav-menu {
+        order: 2;
+    }
+}
+
 .header-socials a {
     color: var(--white);
-    font-size: 0.85rem;
-    opacity: 0.9;
+    font-size: 1.25rem;
+    opacity: 1;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
     transition: var(--transition);
 }
 
 .navbar.scrolled .header-socials a {
     color: var(--text-muted);
+    text-shadow: none;
 }
 
 .header-socials a:hover {
     opacity: 1;
-    color: var(--primary);
     transform: translateY(-2px);
+}
+
+.header-socials .fa-instagram {
+    color: #E1306C;
+}
+
+.header-socials .fa-facebook-f {
+    color: #1877F2;
+}
+
+.header-socials .fa-whatsapp {
+    color: #25D366;
 }
 
 .nav-menu {
@@ -440,9 +469,17 @@ img {
 }
 
 .hero-btns {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+}
+
+.hero-sub-btns {
     display: flex;
     gap: 20px;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .hero-btns .btn-primary {
