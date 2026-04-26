@@ -7,6 +7,9 @@
     <title>Brave Hearts Tour & Travels | Explore Paradise on Earth</title>
     <meta name="description"
         content="Discover the natural beauty of Kashmir with Brave Hearts Tour & Travels. We offer premium, luxurious, and unforgettable tour packages.">
+    <!-- Favicon -->
+    <link rel="icon" style="border-radius: 30%;" type="image/png" href="fav/fav.png">
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,7 +21,35 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
+<script>
+  window.addEventListener("load", () => {
+    const img = new Image();
+    img.src = "fav/fav.png";
+    img.onload = () => {
+      const size = 64;
+      const canvas = document.createElement("canvas");
+      canvas.width = canvas.height = size;
+      const ctx = canvas.getContext("2d");
 
+      // Draw rounded clip
+      const radius = size * 0.3; // ~30% rounding
+      ctx.beginPath();
+      ctx.moveTo(radius, 0);
+      ctx.arcTo(size, 0, size, size, radius);
+      ctx.arcTo(size, size, 0, size, radius);
+      ctx.arcTo(0, size, 0, 0, radius);
+      ctx.arcTo(0, 0, size, 0, radius);
+      ctx.closePath();
+      ctx.clip();
+
+      ctx.drawImage(img, 0, 0, size, size);
+
+      // Swap the favicon
+      const link = document.querySelector("link[rel~='icon']");
+      link.href = canvas.toDataURL("image/png");
+    };
+  });
+</script>
 <body>
 
     <!-- Back to top button -->
@@ -29,16 +60,14 @@
     <!-- Navigation Bar -->
     <nav id="navbar" class="navbar">
         <div class="nav-container">
-            <div class="brand-container">
-                <a href="#" class="logo">
-                    <i class="fas fa-mountain"></i>
-                    <span>Brave Hearts</span>
-                </a>
-                <div class="header-socials">
-                    <a href="https://www.instagram.com/bravehearttourandtravel" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://www.facebook.com/profile.php?id=61568945112556" aria-label="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://wa.me/919596041720" aria-label="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                </div>
+            <a href="#" class="logo">
+                <img src="logo/logo.png" alt="Brave Hearts Logo" style="height: 80px; width: auto; display: block;">
+            </a>
+            
+            <div class="header-socials">
+                <a href="https://www.instagram.com/bravehearttourandtravel" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=61568945112556" aria-label="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://wa.me/919596041720" aria-label="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
             </div>
 
             <div class="menu-toggle" id="mobile-menu">
@@ -345,19 +374,19 @@
                     </div>
                 </div>
                 <div class="gallery-item scroll-anim fade-in-up">
-                    <img src="https://images.unsplash.com/photo-1623193231454-e0e64903df56?auto=format&fit=crop&w=800&q=80"
-                        alt="Autumn in Kashmir" loading="lazy">
+                    <img src="images/Gandola.jpg"
+                        alt="Gulmarg Gondola" loading="lazy">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
-                        <span>Chinar Trees in Autumn</span>
+                        <span>Gulmarg Gondola</span>
                     </div>
                 </div>
                 <div class="gallery-item scroll-anim fade-in-up">
-                    <img src="https://images.unsplash.com/photo-1605342921588-43940173278a?auto=format&fit=crop&w=800&q=80"
-                        alt="Houseboat" loading="lazy">
+                    <img src="images/digjot-singh-Vkkg9XoUcZI-unsplash.jpg"
+                        alt="Kashmir Beauty" loading="lazy">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
-                        <span>Traditional Houseboat</span>
+                        <span>Kashmir Beauty</span>
                     </div>
                 </div>
             </div>
@@ -459,8 +488,7 @@
             <div class="footer-grid">
                 <div class="footer-about">
                     <a href="#" class="logo footer-logo">
-                        <i class="fas fa-mountain"></i>
-                        <span>Brave Hearts</span>
+                        <img src="logo/logo.png" alt="Brave Hearts Logo" style="height: 50px; width: auto;">
                     </a>
                     <p>Your ultimate companion in exploring the breathtaking beauty of Kashmir. We provide premium,
                         luxurious, and hassle-free travel experiences.</p>
@@ -560,18 +588,18 @@
                 <h2 style="margin-bottom: 20px; font-size: 1.8rem; text-align: center;">Request a Callback</h2>
                 <form id="bookNowForm" class="contact-form">
                     <div class="form-group" style="margin-bottom: 15px;">
-                        <input type="text" id="bnName" placeholder="Your Name" required
+                        <input type="text" id="bnName" name="name" placeholder="Your Name" required
                             style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px;">
                     </div>
                     <div class="form-group" style="margin-bottom: 20px;">
-                        <input type="tel" id="bnPhone" placeholder="Contact Number" required
+                        <input type="tel" id="bnPhone" name="phone" placeholder="Contact Number" required
                             style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px;">
                     </div>
                     <button type="submit" class="btn btn-primary btn-block" style="padding: 12px;">Request a
                         Callback</button>
                     <div id="bnSuccessMsg"
                         style="display: none; color: #10B981; font-weight: 600; margin-top: 15px; text-align: center;">
-                        We will reach you shortly.</div>
+                        Thank you, we will connect you in minutes.</div>
                 </form>
             </div>
         </div>

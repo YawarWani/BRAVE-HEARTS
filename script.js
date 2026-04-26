@@ -299,7 +299,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 "images/about_pahalgam_1776581424655.png",
                 "images/gulmarg_snow_1776581444972.png",
                 "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=800&q=80",
-                "https://images.unsplash.com/photo-1623193231454-e0e64903df56?auto=format&fit=crop&w=800&q=80"
+                "images/Gandola.jpg"
             ],
             features: [
                 "15 Double Rooms in 4-Star Properties",
@@ -539,13 +539,28 @@ document.addEventListener('DOMContentLoaded', () => {
         bookNowForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
+            const nameVal = document.getElementById('bnName').value.trim();
+            const phoneVal = document.getElementById('bnPhone').value.trim();
+            
+            if (!nameVal || !phoneVal) return;
+
             const btn = bookNowForm.querySelector('button');
             const originalText = btn.innerHTML;
             btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
             btn.disabled = true;
 
-            // Simulate form submission
-            setTimeout(() => {
+            const formData = new FormData(bookNowForm);
+            formData.append("_subject", "New Callback Request (Book Now)");
+
+            fetch("https://formsubmit.co/ajax/bravehearttourandtravel321@gmail.com", {
+                method: "POST",
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
                 bookNowForm.querySelectorAll('.form-group').forEach(el => el.style.display = 'none');
                 btn.style.display = 'none';
                 bnSuccessMsg.style.display = 'block';
@@ -561,8 +576,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     btn.innerHTML = originalText;
                     btn.disabled = false;
                     bnSuccessMsg.style.display = 'none';
+                }, 4000);
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                btn.innerHTML = "Error! Try Again.";
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
                 }, 3000);
-            }, 1500);
+            });
         });
     }
 
