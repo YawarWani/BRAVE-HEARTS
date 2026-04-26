@@ -90,15 +90,12 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero">
-        <div class="hero-bg">
-            <!-- Mobile Image Background (Loads on screens < 768px) -->
-            <img class="bg-img mobile-bg" src="images/hero-image.jpg" alt="Beautiful Kashmir">
-
-            <!-- Desktop Video Background (Loads on screens >= 768px) -->
-            <video class="bg-img desktop-bg" autoplay loop muted playsinline>
-                <source src="videos/kashmir_hero.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-            </video>
+        <div class="hero-bg" id="heroBgSlider">
+            <div class="hero-slide active" style="background-image: url('hero_images/1.jpg')"></div>
+            <div class="hero-slide" style="background-image: url('hero_images/2.jpg')"></div>
+            <div class="hero-slide" style="background-image: url('hero_images/3.jpg')"></div>
+            <div class="hero-slide" style="background-image: url('hero_images/4.jpg')"></div>
+            <div class="hero-slide" style="background-image: url('hero_images/5.jpg')"></div>
             <div class="overlay"></div>
         </div>
         <div class="hero-content fade-in-up">

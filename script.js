@@ -630,37 +630,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 12. Mobile Hero Background Slider ---
-    const heroSection = document.getElementById('home');
-    const mobileImgElement = document.querySelector('.mobile-bg');
+    // --- 12. Hero Background Slider ---
+    const heroSlides = document.querySelectorAll('.hero-slide');
     
-    if (heroSection && mobileImgElement) {
-        // You can add your mobile-only hero images here!
-        const mobileImages = [
-            'hero_images/1.jpg',
-            'hero_images/2.jpg',
-            'hero_images/3.jpg',
-            'hero_images/4.jpg',
-            'hero_images/5.jpg'
-        ];
-        
-        let currentBgIndex = 0;
+    if (heroSlides.length > 0) {
+        let currentSlideIndex = 0;
 
-        // Set initial image immediately on load for mobile
-        if (window.innerWidth <= 768) {
-            mobileImgElement.src = mobileImages[0];
-        }
-        
         function rotateHeroBackground() {
-            if (window.innerWidth <= 768) {
-                currentBgIndex = (currentBgIndex + 1) % mobileImages.length;
-                mobileImgElement.style.transition = 'opacity 0.5s ease-in-out';
-                mobileImgElement.style.opacity = 0.5;
-                setTimeout(() => {
-                    mobileImgElement.src = mobileImages[currentBgIndex];
-                    mobileImgElement.style.opacity = 1;
-                }, 500);
-            }
+            heroSlides[currentSlideIndex].classList.remove('active');
+            currentSlideIndex = (currentSlideIndex + 1) % heroSlides.length;
+            heroSlides[currentSlideIndex].classList.add('active');
         }
 
         // Change image every 4 seconds
