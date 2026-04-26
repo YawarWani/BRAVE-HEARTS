@@ -641,7 +641,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'hero_images/2.jpg',
             'hero_images/3.jpg',
             'hero_images/4.jpg',
-            'hero_images/4.jpg'
+            'hero_images/5.jpg'
         ];
         
         let currentBgIndex = 0;
