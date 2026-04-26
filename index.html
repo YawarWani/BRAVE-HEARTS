@@ -9,7 +9,7 @@
         content="Discover the natural beauty of Kashmir with Brave Hearts Tour & Travels. We offer premium, luxurious, and unforgettable tour packages.">
     <!-- Favicon -->
     <link rel="icon" style="border-radius: 30%;" type="image/png" href="fav/fav.png">
-    
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,34 +22,35 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <script>
-  window.addEventListener("load", () => {
-    const img = new Image();
-    img.src = "fav/fav.png";
-    img.onload = () => {
-      const size = 64;
-      const canvas = document.createElement("canvas");
-      canvas.width = canvas.height = size;
-      const ctx = canvas.getContext("2d");
+    window.addEventListener("load", () => {
+        const img = new Image();
+        img.src = "fav/fav.png";
+        img.onload = () => {
+            const size = 64;
+            const canvas = document.createElement("canvas");
+            canvas.width = canvas.height = size;
+            const ctx = canvas.getContext("2d");
 
-      // Draw rounded clip
-      const radius = size * 0.3; // ~30% rounding
-      ctx.beginPath();
-      ctx.moveTo(radius, 0);
-      ctx.arcTo(size, 0, size, size, radius);
-      ctx.arcTo(size, size, 0, size, radius);
-      ctx.arcTo(0, size, 0, 0, radius);
-      ctx.arcTo(0, 0, size, 0, radius);
-      ctx.closePath();
-      ctx.clip();
+            // Draw rounded clip
+            const radius = size * 0.3; // ~30% rounding
+            ctx.beginPath();
+            ctx.moveTo(radius, 0);
+            ctx.arcTo(size, 0, size, size, radius);
+            ctx.arcTo(size, size, 0, size, radius);
+            ctx.arcTo(0, size, 0, 0, radius);
+            ctx.arcTo(0, 0, size, 0, radius);
+            ctx.closePath();
+            ctx.clip();
 
-      ctx.drawImage(img, 0, 0, size, size);
+            ctx.drawImage(img, 0, 0, size, size);
 
-      // Swap the favicon
-      const link = document.querySelector("link[rel~='icon']");
-      link.href = canvas.toDataURL("image/png");
-    };
-  });
+            // Swap the favicon
+            const link = document.querySelector("link[rel~='icon']");
+            link.href = canvas.toDataURL("image/png");
+        };
+    });
 </script>
+
 <body>
 
     <!-- Back to top button -->
@@ -63,11 +64,14 @@
             <a href="#" class="logo">
                 <img src="logo/logo.png" alt="Brave Hearts Logo" style="height: 80px; width: auto; display: block;">
             </a>
-            
+
             <div class="header-socials">
-                <a href="https://www.instagram.com/bravehearttourandtravel" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
-                <a href="https://www.facebook.com/profile.php?id=61568945112556" aria-label="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://wa.me/919596041720" aria-label="WhatsApp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://www.instagram.com/bravehearttourandtravel" aria-label="Instagram" target="_blank"><i
+                        class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=61568945112556" aria-label="Facebook"
+                    target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://wa.me/919596041720" aria-label="WhatsApp" target="_blank"><i
+                        class="fab fa-whatsapp"></i></a>
             </div>
 
             <div class="menu-toggle" id="mobile-menu">
@@ -77,6 +81,7 @@
             </div>
 
             <ul class="nav-menu">
+                <div class="close-sidebar"><i class="fas fa-chevron-right"></i></div>
                 <li><a href="#home" class="nav-link active">Home</a></li>
                 <li><a href="#about" class="nav-link">About</a></li>
                 <li><a href="#services" class="nav-link">Services</a></li>
@@ -374,16 +379,14 @@
                     </div>
                 </div>
                 <div class="gallery-item scroll-anim fade-in-up">
-                    <img src="images/Gandola.jpg"
-                        alt="Gulmarg Gondola" loading="lazy">
+                    <img src="images/Gandola.jpg" alt="Gulmarg Gondola" loading="lazy">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                         <span>Gulmarg Gondola</span>
                     </div>
                 </div>
                 <div class="gallery-item scroll-anim fade-in-up">
-                    <img src="images/digjot-singh-Vkkg9XoUcZI-unsplash.jpg"
-                        alt="Kashmir Beauty" loading="lazy">
+                    <img src="images/digjot-singh-Vkkg9XoUcZI-unsplash.jpg" alt="Kashmir Beauty" loading="lazy">
                     <div class="gallery-overlay">
                         <i class="fas fa-search-plus"></i>
                         <span>Kashmir Beauty</span>
@@ -506,9 +509,12 @@
                         </div>
                     </div>
                     <div class="social-links">
-                        <a href="https://www.facebook.com/profile.php?id=61568945112556" aria-label="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/bravehearttourandtravel" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://x.com/heart12385" aria-label="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=61568945112556" aria-label="Facebook"
+                            target="_blank"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/bravehearttourandtravel" aria-label="Instagram"
+                            target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="https://x.com/heart12385" aria-label="Twitter" target="_blank"><i
+                                class="fab fa-twitter"></i></a>
                     </div>
                 </div>
                 <div class="footer-links">

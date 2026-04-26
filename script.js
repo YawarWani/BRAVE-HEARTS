@@ -10,12 +10,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const mobileMenu = document.getElementById('mobile-menu');
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
+    const closeSidebarBtns = document.querySelectorAll('.close-sidebar');
 
     if (mobileMenu && navMenu) {
         mobileMenu.addEventListener('click', () => {
             mobileMenu.classList.toggle('active');
             navMenu.classList.toggle('active');
         });
+
+        if (closeSidebarBtns) {
+            closeSidebarBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    mobileMenu.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+        }
 
         // Close mobile menu when a link is clicked
         if (navLinks) {
@@ -26,6 +36,37 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
         }
+
+        // Mobile Swipe Detection for Sidebar
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        document.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            
+            // Significant swipe threshold
+            if (Math.abs(touchStartX - touchEndX) > 40) {
+                // Swipe right to left (open sidebar)
+                if (touchStartX - touchEndX > 40) {
+                    // Only open if the swipe started near the right edge of the screen
+                    if (touchStartX > window.innerWidth - 100) {
+                        mobileMenu.classList.add('active');
+                        navMenu.classList.add('active');
+                    }
+                }
+                // Swipe left to right (close sidebar)
+                else if (touchEndX - touchStartX > 40) {
+                    if (navMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    }
+                }
+            }
+        }, { passive: true });
     }
 
     // --- 3. Sticky Navbar & Back to Top Button ---
