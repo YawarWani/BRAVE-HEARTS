@@ -1,30 +1,40 @@
 "use client";
+
 import { signOut } from "next-auth/react";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+
+const themes = [
+  { id: "light", label: "Light", icon: "fa-sun" },
+  { id: "dark", label: "Dark", icon: "fa-moon" },
+  { id: "midnight", label: "Midnight", icon: "fa-star" },
+];
+
+function getInitialTheme() {
+  if (typeof window === "undefined") return "light";
+  return localStorage.getItem("admin-theme") || "light";
+}
 
 export default function AdminControls({ username }) {
   const [showModal, setShowModal] = useState(false);
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(getInitialTheme);
   const [form, setForm] = useState({ current: "", next: "", confirm: "" });
   const [status, setStatus] = useState({ msg: "", type: "" });
   const [loading, setLoading] = useState(false);
 
-  // Load saved theme on mount
   useEffect(() => {
-    const saved = localStorage.getItem("admin-theme") || "light";
-    setTheme(saved);
-    document.documentElement.setAttribute("data-admin-theme", saved);
-  }, []);
+    document.documentElement.setAttribute("data-admin-theme", theme);
+    localStorage.setItem("admin-theme", theme);
+  }, [theme]);
 
-  const toggleTheme = () => {
-    const next = theme === "light" ? "dark" : theme === "dark" ? "midnight" : "light";
-    setTheme(next);
-    localStorage.setItem("admin-theme", next);
-    document.documentElement.setAttribute("data-admin-theme", next);
+  const updateForm = (field, value) => {
+    setForm((current) => ({ ...current, [field]: value }));
   };
 
-  const themeIcon = theme === "light" ? "fa-moon" : theme === "dark" ? "fa-star" : "fa-sun";
-  const themeLabel = theme === "light" ? "Dark Mode" : theme === "dark" ? "Midnight" : "Light Mode";
+  const closeModal = () => {
+    setShowModal(false);
+    setStatus({ msg: "", type: "" });
+    setForm({ current: "", next: "", confirm: "" });
+  };
 
   const handlePasswordChange = async (e) => {
     e.preventDefault();
@@ -36,19 +46,25 @@ export default function AdminControls({ username }) {
       setStatus({ msg: "Password must be at least 6 characters.", type: "error" });
       return;
     }
+
     setLoading(true);
     setStatus({ msg: "", type: "" });
+
     try {
       const res = await fetch("/api/admin/change-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ currentPassword: form.current, newPassword: form.next }),
+        body: JSON.stringify({
+          currentPassword: form.current,
+          newPassword: form.next,
+        }),
       });
       const data = await res.json();
+
       if (res.ok) {
-        setStatus({ msg: "✅ Password changed successfully!", type: "success" });
+        setStatus({ msg: "Password changed successfully.", type: "success" });
         setForm({ current: "", next: "", confirm: "" });
-        setTimeout(() => setShowModal(false), 1800);
+        setTimeout(() => setShowModal(false), 1400);
       } else {
         setStatus({ msg: data.error || "Failed to change password.", type: "error" });
       }
@@ -61,39 +77,65 @@ export default function AdminControls({ username }) {
 
   return (
     <>
-      {/* Theme Toggle Button */}
-      <button
-        onClick={toggleTheme}
-        className="ctrl-btn theme-btn"
-        title={`Switch to ${themeLabel}`}
-      >
-        <i className={`fas ${themeIcon}`}></i>
-        <span>{themeLabel}</span>
-      </button>
+      <section className="admin-control-panel" aria-label="Admin settings">
+        <div className="control-panel-header">
+          <div>
+            <span className="control-kicker">Settings</span>
+            <h3>Admin Controls</h3>
+          </div>
+        </div>
 
-      {/* Change Password Button */}
-      <button
-        onClick={() => { setShowModal(true); setStatus({ msg: "", type: "" }); }}
-        className="ctrl-btn pwd-btn"
-        title="Change Password"
-      >
-        <i className="fas fa-key"></i>
-        <span>Change Password</span>
-      </button>
+        <div className="theme-picker" aria-label="Theme selector">
+          {themes.map((item) => (
+            <button
+              key={item.id}
+              type="button"
+              className={`theme-option ${theme === item.id ? "active" : ""}`}
+              onClick={() => setTheme(item.id)}
+              aria-pressed={theme === item.id}
+            >
+              <i className={`fas ${item.icon}`}></i>
+              <span>{item.label}</span>
+            </button>
+          ))}
+        </div>
 
-      {/* Logout Button */}
-      <button
-        onClick={() => signOut({ callbackUrl: "/admin/login" })}
-        className="ctrl-btn logout-btn"
-        title="Logout"
-      >
-        <i className="fas fa-sign-out-alt"></i>
-        <span>Logout</span>
-      </button>
+        <div className="control-actions">
+          <button
+            type="button"
+            onClick={() => {
+              setShowModal(true);
+              setStatus({ msg: "", type: "" });
+            }}
+            className="control-action"
+          >
+            <span className="action-icon password">
+              <i className="fas fa-key"></i>
+            </span>
+            <span>
+              <strong>Change Password</strong>
+              <small>Update @{username}</small>
+            </span>
+          </button>
 
-      {/* Change Password Modal */}
+          <button
+            type="button"
+            onClick={() => signOut({ callbackUrl: "/admin/login" })}
+            className="control-action logout"
+          >
+            <span className="action-icon logout">
+              <i className="fas fa-sign-out-alt"></i>
+            </span>
+            <span>
+              <strong>Logout</strong>
+              <small>Exit dashboard</small>
+            </span>
+          </button>
+        </div>
+      </section>
+
       {showModal && (
-        <div className="modal-overlay" onClick={() => setShowModal(false)}>
+        <div className="modal-overlay" onClick={closeModal}>
           <div className="modal-box" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <div className="modal-icon">
@@ -103,7 +145,7 @@ export default function AdminControls({ username }) {
                 <h3>Change Password</h3>
                 <p>Secure your account @{username}</p>
               </div>
-              <button className="modal-close" onClick={() => setShowModal(false)}>
+              <button type="button" className="modal-close" onClick={closeModal}>
                 <i className="fas fa-times"></i>
               </button>
             </div>
@@ -115,27 +157,29 @@ export default function AdminControls({ username }) {
                   type="password"
                   placeholder="Enter current password"
                   value={form.current}
-                  onChange={(e) => setForm({ ...form, current: e.target.value })}
+                  onChange={(e) => updateForm("current", e.target.value)}
                   required
                 />
               </div>
+
               <div className="modal-field">
                 <label>New Password</label>
                 <input
                   type="password"
                   placeholder="Min. 6 characters"
                   value={form.next}
-                  onChange={(e) => setForm({ ...form, next: e.target.value })}
+                  onChange={(e) => updateForm("next", e.target.value)}
                   required
                 />
               </div>
+
               <div className="modal-field">
                 <label>Confirm New Password</label>
                 <input
                   type="password"
                   placeholder="Repeat new password"
                   value={form.confirm}
-                  onChange={(e) => setForm({ ...form, confirm: e.target.value })}
+                  onChange={(e) => updateForm("confirm", e.target.value)}
                   required
                 />
               </div>
@@ -146,9 +190,17 @@ export default function AdminControls({ username }) {
 
               <div className="modal-actions">
                 <button type="submit" className="btn-save" disabled={loading}>
-                  {loading ? <><i className="fas fa-spinner fa-spin"></i> Saving...</> : <><i className="fas fa-lock"></i> Update Password</>}
+                  {loading ? (
+                    <>
+                      <i className="fas fa-spinner fa-spin"></i> Saving...
+                    </>
+                  ) : (
+                    <>
+                      <i className="fas fa-lock"></i> Update Password
+                    </>
+                  )}
                 </button>
-                <button type="button" className="btn-cancel" onClick={() => setShowModal(false)}>
+                <button type="button" className="btn-cancel" onClick={closeModal}>
                   Cancel
                 </button>
               </div>
@@ -158,106 +210,199 @@ export default function AdminControls({ username }) {
       )}
 
       <style jsx>{`
-        /* ── Control Buttons ── */
-        .ctrl-btn {
+        .admin-control-panel {
+          background: rgba(255, 255, 255, 0.06);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 16px;
+          padding: 14px;
+        }
+
+        .control-panel-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 12px;
+        }
+
+        .control-kicker {
+          display: block;
+          color: #94a3b8;
+          font-size: 0.68rem;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          margin-bottom: 2px;
+        }
+
+        .control-panel-header h3 {
+          margin: 0;
+          color: #f8fafc;
+          font-size: 0.95rem;
+        }
+
+        .theme-picker {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 6px;
+          padding: 4px;
+          background: rgba(15, 23, 42, 0.55);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 12px;
+          margin-bottom: 12px;
+        }
+
+        .theme-option {
+          border: none;
+          border-radius: 9px;
+          background: transparent;
+          color: #94a3b8;
+          cursor: pointer;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 5px;
+          min-height: 58px;
+          font-family: inherit;
+          font-size: 0.72rem;
+          font-weight: 700;
+          transition: background 0.2s, color 0.2s, transform 0.2s;
+        }
+
+        .theme-option i {
+          font-size: 0.95rem;
+        }
+
+        .theme-option:hover,
+        .theme-option.active {
+          background: #f8fafc;
+          color: #0f172a;
+        }
+
+        .theme-option.active {
+          box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+        }
+
+        .control-actions {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .control-action {
+          width: 100%;
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 12px;
+          background: rgba(255, 255, 255, 0.06);
+          color: #e2e8f0;
+          cursor: pointer;
           display: flex;
           align-items: center;
           gap: 10px;
-          width: 100%;
-          padding: 11px 16px;
-          border: none;
-          border-radius: 10px;
-          font-size: 0.88rem;
-          font-weight: 600;
-          cursor: pointer;
-          transition: all 0.2s ease;
+          padding: 11px;
+          text-align: left;
           font-family: inherit;
+          transition: background 0.2s, transform 0.2s, border-color 0.2s;
         }
 
-        .theme-btn {
-          background: var(--ctrl-theme-bg, #e0f2fe);
-          color: var(--ctrl-theme-color, #0369a1);
-        }
-        .theme-btn:hover {
-          background: var(--ctrl-theme-hover, #bae6fd);
-          transform: translateX(3px);
+        .control-action:hover {
+          background: rgba(255, 255, 255, 0.1);
+          border-color: rgba(255, 255, 255, 0.18);
+          transform: translateY(-1px);
         }
 
-        .pwd-btn {
-          background: var(--ctrl-pwd-bg, #fef3c7);
-          color: var(--ctrl-pwd-color, #b45309);
-        }
-        .pwd-btn:hover {
-          background: var(--ctrl-pwd-hover, #fde68a);
-          transform: translateX(3px);
+        .control-action strong,
+        .control-action small {
+          display: block;
         }
 
-        .logout-btn {
-          background: var(--ctrl-logout-bg, #fee2e2);
-          color: var(--ctrl-logout-color, #dc2626);
-        }
-        .logout-btn:hover {
-          background: var(--ctrl-logout-hover, #fecaca);
-          transform: translateX(3px);
+        .control-action strong {
+          color: #f8fafc;
+          font-size: 0.86rem;
         }
 
-        /* ── Modal Overlay ── */
+        .control-action small {
+          color: #94a3b8;
+          font-size: 0.74rem;
+          margin-top: 1px;
+        }
+
+        .action-icon {
+          width: 34px;
+          height: 34px;
+          border-radius: 10px;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+
+        .action-icon.password {
+          background: #fef3c7;
+          color: #b45309;
+        }
+
+        .action-icon.logout {
+          background: #fee2e2;
+          color: #dc2626;
+        }
+
         .modal-overlay {
           position: fixed;
           inset: 0;
-          background: rgba(0, 0, 0, 0.55);
-          backdrop-filter: blur(6px);
+          background: rgba(2, 6, 23, 0.68);
+          backdrop-filter: blur(8px);
           z-index: 9999;
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 20px;
+          padding: 18px;
           animation: fadeIn 0.2s ease;
         }
 
         @keyframes fadeIn {
           from { opacity: 0; }
-          to   { opacity: 1; }
+          to { opacity: 1; }
         }
 
         .modal-box {
           background: var(--modal-bg, #ffffff);
-          border-radius: 20px;
-          padding: 32px;
+          border-radius: 18px;
+          padding: 26px;
           width: 100%;
           max-width: 440px;
-          box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+          box-shadow: 0 25px 50px rgba(0, 0, 0, 0.24);
           animation: slideUp 0.25s ease;
           border: 1px solid var(--modal-border, #e2e8f0);
         }
 
         @keyframes slideUp {
-          from { transform: translateY(30px); opacity: 0; }
-          to   { transform: translateY(0);    opacity: 1; }
+          from { transform: translateY(24px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
         }
 
         .modal-header {
           display: flex;
           align-items: center;
           gap: 14px;
-          margin-bottom: 28px;
+          margin-bottom: 24px;
         }
 
         .modal-icon {
-          width: 48px;
-          height: 48px;
+          width: 46px;
+          height: 46px;
           border-radius: 14px;
-          background: linear-gradient(135deg, #0ea5e9, #0284c7);
+          background: linear-gradient(135deg, #0f766e, #0ea5e9);
           color: white;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 1.2rem;
+          font-size: 1.1rem;
           flex-shrink: 0;
         }
 
         .modal-header h3 {
-          font-size: 1.2rem;
+          font-size: 1.15rem;
           color: var(--modal-text, #0f172a);
           margin: 0 0 2px 0;
         }
@@ -274,22 +419,23 @@ export default function AdminControls({ username }) {
           border: none;
           width: 34px;
           height: 34px;
-          border-radius: 8px;
+          border-radius: 10px;
           cursor: pointer;
           color: var(--modal-muted, #64748b);
-          font-size: 0.9rem;
           display: flex;
           align-items: center;
           justify-content: center;
           flex-shrink: 0;
-          transition: background 0.2s;
         }
-        .modal-close:hover { background: var(--modal-close-hover, #e2e8f0); }
+
+        .modal-close:hover {
+          background: var(--modal-close-hover, #e2e8f0);
+        }
 
         .modal-form {
           display: flex;
           flex-direction: column;
-          gap: 16px;
+          gap: 15px;
         }
 
         .modal-field {
@@ -300,15 +446,15 @@ export default function AdminControls({ username }) {
 
         .modal-field label {
           font-size: 0.82rem;
-          font-weight: 600;
+          font-weight: 700;
           color: var(--modal-label, #475569);
         }
 
         .modal-field input {
-          padding: 11px 14px;
+          padding: 12px 14px;
           border: 1.5px solid var(--modal-input-border, #cbd5e1);
           border-radius: 10px;
-          font-size: 0.93rem;
+          font-size: 0.94rem;
           background: var(--modal-input-bg, #f8fafc);
           color: var(--modal-text, #0f172a);
           transition: all 0.2s;
@@ -317,22 +463,24 @@ export default function AdminControls({ username }) {
 
         .modal-field input:focus {
           outline: none;
-          border-color: #0ea5e9;
+          border-color: #0f766e;
           background: var(--modal-bg, #fff);
-          box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.12);
+          box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.14);
         }
 
         .modal-status {
           padding: 10px 14px;
-          border-radius: 8px;
+          border-radius: 10px;
           font-size: 0.85rem;
-          font-weight: 500;
+          font-weight: 600;
         }
+
         .modal-status.success {
           background: #dcfce7;
           color: #166534;
           border: 1px solid #bbf7d0;
         }
+
         .modal-status.error {
           background: #fee2e2;
           color: #dc2626;
@@ -341,46 +489,58 @@ export default function AdminControls({ username }) {
 
         .modal-actions {
           display: flex;
-          gap: 12px;
+          gap: 10px;
           padding-top: 4px;
+        }
+
+        .btn-save,
+        .btn-cancel {
+          border: none;
+          padding: 12px 16px;
+          border-radius: 10px;
+          font-weight: 700;
+          font-size: 0.9rem;
+          cursor: pointer;
+          font-family: inherit;
         }
 
         .btn-save {
           flex: 1;
-          background: linear-gradient(135deg, #0ea5e9, #0284c7);
+          background: #0f766e;
           color: white;
-          border: none;
-          padding: 12px 20px;
-          border-radius: 10px;
-          font-weight: 600;
-          font-size: 0.9rem;
-          cursor: pointer;
           display: flex;
           align-items: center;
           justify-content: center;
           gap: 8px;
-          transition: all 0.2s;
-          font-family: inherit;
         }
+
         .btn-save:hover:not(:disabled) {
-          transform: translateY(-1px);
-          box-shadow: 0 6px 20px rgba(14,165,233,0.35);
+          background: #115e59;
         }
-        .btn-save:disabled { opacity: 0.65; cursor: not-allowed; }
+
+        .btn-save:disabled {
+          opacity: 0.65;
+          cursor: not-allowed;
+        }
 
         .btn-cancel {
           background: var(--modal-cancel-bg, #f1f5f9);
           color: var(--modal-muted, #64748b);
-          border: none;
-          padding: 12px 20px;
-          border-radius: 10px;
-          font-weight: 600;
-          font-size: 0.9rem;
-          cursor: pointer;
-          transition: all 0.2s;
-          font-family: inherit;
         }
-        .btn-cancel:hover { background: var(--modal-cancel-hover, #e2e8f0); }
+
+        .btn-cancel:hover {
+          background: var(--modal-cancel-hover, #e2e8f0);
+        }
+
+        @media (max-width: 480px) {
+          .modal-box {
+            padding: 22px;
+          }
+
+          .modal-actions {
+            flex-direction: column;
+          }
+        }
       `}</style>
     </>
   );

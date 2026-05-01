@@ -16,12 +16,10 @@ export default function PackageAdmin() {
     features: ""
   });
 
-  useEffect(() => {
-    fetchPackages();
-  }, []);
-
-  const fetchPackages = async () => {
-    setLoading(true);
+  const fetchPackages = async (showLoading = true) => {
+    if (showLoading) {
+      setLoading(true);
+    }
     try {
       const res = await fetch("/api/packages");
       const data = await res.json();
@@ -32,6 +30,32 @@ export default function PackageAdmin() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    let ignore = false;
+
+    const loadPackages = async () => {
+      try {
+        const res = await fetch("/api/packages");
+        const data = await res.json();
+        if (!ignore) {
+          setPackages(data);
+        }
+      } catch (err) {
+        console.error("Failed to fetch packages", err);
+      } finally {
+        if (!ignore) {
+          setLoading(false);
+        }
+      }
+    };
+
+    loadPackages();
+
+    return () => {
+      ignore = true;
+    };
+  }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -495,6 +519,36 @@ export default function PackageAdmin() {
           font-size: 3rem;
           margin-bottom: 15px;
           color: #cbd5e1;
+        }
+
+        @media (max-width: 768px) {
+          .editor-card {
+            padding: 22px;
+          }
+
+          .form-row.two-cols {
+            grid-template-columns: 1fr;
+          }
+
+          .form-actions {
+            flex-direction: column;
+          }
+
+          .btn-primary-action,
+          .btn-secondary-action {
+            width: 100%;
+            justify-content: center;
+          }
+
+          .admin-packages-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .pkg-price-bar {
+            align-items: flex-start;
+            flex-direction: column;
+            gap: 4px;
+          }
         }
       `}</style>
     </div>
