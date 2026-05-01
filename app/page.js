@@ -12,7 +12,6 @@ import heroKashmirImg from "../public/images/hero_kashmir_1776581409040.png";
 import gandolaImg from "../public/images/Gandola.jpg";
 import dalLakeImg from "../public/grid_images/Dal-lake.jpg";
 import sonmargImg from "../public/grid_images/sonmarg.jpg";
-import gurezImg from "../public/grid_images/Gurez.jpg";
 
 export default function Home() {
   const [selectedPackage, setSelectedPackage] = useState(null);
