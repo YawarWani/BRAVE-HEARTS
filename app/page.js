@@ -362,47 +362,40 @@ export default function Home() {
             <span className="subtitle">Photo Gallery</span>
             <h2 className="section-title">Glimpses of <span>Paradise</span></h2>
           </div>
-          <div className="gallery-masonry">
-            <div className="gallery-item scroll-anim fade-in-up">
-              <Image src={dalLakeImg} alt="Dal Lake" placeholder="blur" style={{ width: "100%", height: "auto" }} />
+          <div 
+            className="gallery-grid" 
+            style={{ 
+              display: "grid", 
+              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", 
+              gap: "20px" 
+            }}
+          >
+            <div className="gallery-item scroll-anim fade-in-up" style={{ height: "300px" }}>
+              <Image src={dalLakeImg} alt="Dal Lake" placeholder="blur" fill style={{ objectFit: "cover" }} />
               <div className="gallery-overlay">
                 <i className="fas fa-search-plus"></i>
                 <span>Dal Lake, Srinagar</span>
               </div>
             </div>
-            <div className="gallery-item scroll-anim fade-in-up">
-              <Image src={gulmargSnowImg} alt="Gulmarg" placeholder="blur" style={{ width: "100%", height: "auto" }} />
+            <div className="gallery-item scroll-anim fade-in-up" style={{ transitionDelay: "0.1s", height: "300px" }}>
+              <Image src={gulmargSnowImg} alt="Gulmarg" placeholder="blur" fill style={{ objectFit: "cover" }} />
               <div className="gallery-overlay">
                 <i className="fas fa-search-plus"></i>
                 <span>Gulmarg Ski Resort</span>
               </div>
             </div>
-            <div className="gallery-item scroll-anim fade-in-up">
-              <Image src={pahalgamImg} alt="Pahalgam" placeholder="blur" style={{ width: "100%", height: "auto" }} />
+            <div className="gallery-item scroll-anim fade-in-up" style={{ transitionDelay: "0.2s", height: "300px" }}>
+              <Image src={pahalgamImg} alt="Pahalgam" placeholder="blur" fill style={{ objectFit: "cover" }} />
               <div className="gallery-overlay">
                 <i className="fas fa-search-plus"></i>
                 <span>Pahalgam Valley</span>
               </div>
             </div>
-            <div className="gallery-item scroll-anim fade-in-up">
-              <Image src={sonmargImg} alt="Sonmarg" placeholder="blur" style={{ width: "100%", height: "auto" }} />
+            <div className="gallery-item scroll-anim fade-in-up" style={{ transitionDelay: "0.3s", height: "300px" }}>
+              <Image src={sonmargImg} alt="Sonmarg" placeholder="blur" fill style={{ objectFit: "cover" }} />
               <div className="gallery-overlay">
                 <i className="fas fa-search-plus"></i>
                 <span>Sonmarg Glaciers</span>
-              </div>
-            </div>
-            <div className="gallery-item scroll-anim fade-in-up">
-              <Image src={gandolaImg} alt="Gulmarg Gondola" placeholder="blur" style={{ width: "100%", height: "auto" }} />
-              <div className="gallery-overlay">
-                <i className="fas fa-search-plus"></i>
-                <span>Gulmarg Gondola</span>
-              </div>
-            </div>
-            <div className="gallery-item scroll-anim fade-in-up">
-              <Image src={gurezImg} alt="Kashmir Beauty" placeholder="blur" style={{ width: "100%", height: "auto" }} />
-              <div className="gallery-overlay">
-                <i className="fas fa-search-plus"></i>
-                <span>Gurez Valley</span>
               </div>
             </div>
           </div>
