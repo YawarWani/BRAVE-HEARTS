@@ -3,6 +3,7 @@ import { authOptions } from "../../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import PackageAdmin from "../../../components/PackageAdmin";
+import AdminControls from "../../../components/AdminControls";
 
 export default async function AdminDashboard() {
   const session = await getServerSession(authOptions);
@@ -19,7 +20,7 @@ export default async function AdminDashboard() {
           <i className="fas fa-compass"></i>
           <span>Brave Hearts</span>
         </div>
-        
+
         <nav className="sidebar-nav">
           <Link href="/admin/dashboard" className="nav-item active">
             <i className="fas fa-box"></i> Manage Packages
@@ -27,7 +28,6 @@ export default async function AdminDashboard() {
           <Link href="/" className="nav-item">
             <i className="fas fa-home"></i> View Live Site
           </Link>
-          {/* Add more links here later if needed */}
         </nav>
 
         <div className="sidebar-footer">
@@ -40,7 +40,11 @@ export default async function AdminDashboard() {
               <span className="name">@{session.user.name}</span>
             </div>
           </div>
-          {/* Client-side logout button could go here, or handled via NextAuth SignOut on client */}
+
+          {/* Controls: Theme + Change Password + Logout */}
+          <div className="sidebar-controls">
+            <AdminControls username={session.user.name} />
+          </div>
         </div>
       </aside>
 
@@ -62,7 +66,6 @@ export default async function AdminDashboard() {
           <PackageAdmin />
         </div>
       </main>
-
     </div>
   );
 }

@@ -2183,3 +2183,130 @@ img {
   .admin-content { padding: 20px; }
 }
 
+/* ==========================================================================
+   Admin Sidebar Controls Layout
+   ========================================================================== */
+.sidebar-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ==========================================================================
+   Admin Panel Themes
+   ========================================================================== */
+
+/* ── Light Theme (default) ── */
+[data-admin-theme="light"] .admin-dashboard,
+[data-admin-theme="light"] {
+  --admin-sidebar-bg: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  --admin-sidebar-text: #e2e8f0;
+  --admin-sidebar-border: rgba(255,255,255,0.08);
+  --admin-main-bg: #f8fafc;
+  --admin-header-bg: #ffffff;
+  --admin-header-border: #e2e8f0;
+  --admin-header-text: #0f172a;
+  --admin-header-sub: #64748b;
+  --ctrl-theme-bg: #e0f2fe;
+  --ctrl-theme-color: #0369a1;
+  --ctrl-theme-hover: #bae6fd;
+  --ctrl-pwd-bg: #fef3c7;
+  --ctrl-pwd-color: #b45309;
+  --ctrl-pwd-hover: #fde68a;
+  --ctrl-logout-bg: #fee2e2;
+  --ctrl-logout-color: #dc2626;
+  --ctrl-logout-hover: #fecaca;
+  --modal-bg: #ffffff;
+  --modal-border: #e2e8f0;
+  --modal-text: #0f172a;
+  --modal-muted: #64748b;
+  --modal-label: #475569;
+  --modal-input-bg: #f8fafc;
+  --modal-input-border: #cbd5e1;
+  --modal-close-bg: #f1f5f9;
+  --modal-close-hover: #e2e8f0;
+  --modal-cancel-bg: #f1f5f9;
+  --modal-cancel-hover: #e2e8f0;
+}
+
+/* ── Dark Theme ── */
+[data-admin-theme="dark"] .admin-sidebar { background: linear-gradient(180deg, #020617 0%, #0f172a 100%) !important; }
+[data-admin-theme="dark"] .admin-main   { background: #0f172a !important; }
+[data-admin-theme="dark"] .admin-header {
+  background: #1e293b !important;
+  border-color: #334155 !important;
+}
+[data-admin-theme="dark"] .admin-header h1 { color: #f1f5f9 !important; }
+[data-admin-theme="dark"] .admin-header p  { color: #94a3b8 !important; }
+[data-admin-theme="dark"] .admin-content   { background: #0f172a; }
+[data-admin-theme="dark"] {
+  --ctrl-theme-bg: #1e3a5f;
+  --ctrl-theme-color: #7dd3fc;
+  --ctrl-theme-hover: #164e63;
+  --ctrl-pwd-bg: #3d2b08;
+  --ctrl-pwd-color: #fcd34d;
+  --ctrl-pwd-hover: #451a03;
+  --ctrl-logout-bg: #3b0f0f;
+  --ctrl-logout-color: #fca5a5;
+  --ctrl-logout-hover: #450a0a;
+  --modal-bg: #1e293b;
+  --modal-border: #334155;
+  --modal-text: #f1f5f9;
+  --modal-muted: #94a3b8;
+  --modal-label: #cbd5e1;
+  --modal-input-bg: #0f172a;
+  --modal-input-border: #334155;
+  --modal-close-bg: #334155;
+  --modal-close-hover: #475569;
+  --modal-cancel-bg: #334155;
+  --modal-cancel-hover: #475569;
+}
+
+/* ── Midnight Theme ── */
+[data-admin-theme="midnight"] .admin-sidebar { background: linear-gradient(180deg, #0d0221 0%, #150a2e 100%) !important; }
+[data-admin-theme="midnight"] .admin-main   { background: #0d0221 !important; }
+[data-admin-theme="midnight"] .admin-header {
+  background: #150a2e !important;
+  border-color: #2e1a5e !important;
+}
+[data-admin-theme="midnight"] .admin-header h1 { color: #e9d5ff !important; }
+[data-admin-theme="midnight"] .admin-header p  { color: #a78bfa !important; }
+[data-admin-theme="midnight"] .admin-content   { background: #0d0221; }
+[data-admin-theme="midnight"] .nav-item        { color: #c4b5fd !important; }
+[data-admin-theme="midnight"] .nav-item:hover,
+[data-admin-theme="midnight"] .nav-item.active { background: rgba(139,92,246,0.2) !important; color: #e9d5ff !important; }
+[data-admin-theme="midnight"] .sidebar-brand   { color: #e9d5ff !important; }
+[data-admin-theme="midnight"] .sidebar-brand i { color: #a78bfa !important; }
+[data-admin-theme="midnight"] {
+  --ctrl-theme-bg: #1e0d3e;
+  --ctrl-theme-color: #c4b5fd;
+  --ctrl-theme-hover: #2d1566;
+  --ctrl-pwd-bg: #2d1a00;
+  --ctrl-pwd-color: #fde68a;
+  --ctrl-pwd-hover: #3d2200;
+  --ctrl-logout-bg: #2d0a1e;
+  --ctrl-logout-color: #fda4af;
+  --ctrl-logout-hover: #3d0f27;
+  --modal-bg: #150a2e;
+  --modal-border: #2e1a5e;
+  --modal-text: #e9d5ff;
+  --modal-muted: #a78bfa;
+  --modal-label: #c4b5fd;
+  --modal-input-bg: #0d0221;
+  --modal-input-border: #2e1a5e;
+  --modal-close-bg: #1e0d3e;
+  --modal-close-hover: #2d1566;
+  --modal-cancel-bg: #1e0d3e;
+  --modal-cancel-hover: #2d1566;
+}
+
+/* Apply sidebar bg from theme variable */
+.admin-sidebar {
+  background: var(--admin-sidebar-bg, linear-gradient(180deg, #0f172a 0%, #1e293b 100%));
+}
+.admin-main {
+  background: var(--admin-main-bg, #f8fafc);
+}
