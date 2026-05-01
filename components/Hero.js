@@ -8,7 +8,7 @@ import hero3 from "../public/hero_images/3.jpg";
 import hero4 from "../public/hero_images/4.jpg";
 import hero5 from "../public/hero_images/5.jpg";
 
-export default function Hero() {
+export default function Hero({ onPlanMyTrip }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [
     hero1,
@@ -48,9 +48,13 @@ export default function Hero() {
             <i className="fas fa-globe-asia"></i> Explore Packages
           </Link>
           <div className="hero-sub-btns">
-            <a href="#" id="openBookNowModal" className="btn btn-outline">
+            <button 
+              onClick={onPlanMyTrip}
+              className="btn btn-outline"
+              style={{ cursor: 'pointer' }}
+            >
               Plan My Trip
-            </a>
+            </button>
             <a href="tel:+919596041720" className="btn btn-outline">
               Let's Talk <i className="fas fa-phone-alt"></i>
             </a>

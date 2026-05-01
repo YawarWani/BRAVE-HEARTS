@@ -1,0 +1,27 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id       String @id @default(uuid())
+  username String @unique
+  password String // Hashed using bcrypt
+}
+
+model Package {
+  id         String   @id @default(uuid())
+  title      String
+  duration   String
+  groupSize  String
+  totalPrice String
+  perPerson  String
+  images     String[] // Native Postgres Array
+  features   String[] // Native Postgres Array
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}

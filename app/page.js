@@ -18,57 +18,28 @@ export default function Home() {
   const [isPackageModalOpen, setPackageModalOpen] = useState(false);
   const [isBookNowModalOpen, setBookNowModalOpen] = useState(false);
 
-  const packageData = {
-    package1: {
-      title: "Premium Group Experience (30 Pax)",
-      duration: "4 Nights / 5 Days",
-      groupSize: "30 Persons",
-      totalPrice: "₹4,92,000",
-      perPerson: "(₹16,400 per person)",
-      images: [
-        pahalgamImg,
-        gulmargSnowImg,
-        "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=800&q=80",
-        gandolaImg
-      ],
-      features: [
-        "15 Double Rooms in 4-Star Properties",
-        "1 Meeting Hall for Party and Meeting",
-        "Daily Breakfast and Dinner",
-        "Warm Welcome at Airport",
-        "Shikara Ride",
-        "ABC: Aru Valley, Betab Valley, Chandanwadi",
-        "Pickup and Drop",
-        "Extensive Local Sightseeing"
-      ]
-    },
-    package2: {
-      title: "Intimate Group Escape (10 Pax)",
-      duration: "4 Nights / 5 Days",
-      groupSize: "10 Persons",
-      totalPrice: "₹1,98,000",
-      perPerson: "(₹19,800 per person)",
-      images: [
-        gulmargSnowImg,
-        "https://images.unsplash.com/photo-1598091383021-15ddea10925d?auto=format&fit=crop&w=800&q=80",
-        heroKashmirImg,
-        pahalgamImg
-      ],
-      features: [
-        "5 Double Rooms in 4-Star Properties",
-        "Daily Breakfast and Dinner",
-        "Warm Welcome at Airport",
-        "Shikara Ride",
-        "ABC: Aru Valley, Betab Valley, Chandanwadi",
-        "Pickup and Drop",
-        "Extensive Local Sightseeing"
-      ]
-    }
-  };
+  const [packages, setPackages] = useState([]);
+  const [loadingPackages, setLoadingPackages] = useState(true);
 
-  const openPackage = (pkgId) => {
-    setSelectedPackage(packageData[pkgId]);
+  useEffect(() => {
+    const fetchPackages = async () => {
+      try {
+        const res = await fetch("/api/packages");
+        const data = await res.json();
+        setPackages(data);
+      } catch (err) {
+        console.error("Failed to fetch packages:", err);
+      } finally {
+        setLoadingPackages(false);
+      }
+    };
+    fetchPackages();
+  }, []);
+
+  const openPackage = (pkg) => {
+    setSelectedPackage(pkg);
     setPackageModalOpen(true);
+    document.body.style.overflow = "hidden";
   };
 
   useEffect(() => {
@@ -149,7 +120,10 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <Hero />
+      <Hero onPlanMyTrip={() => {
+        setBookNowModalOpen(true);
+        document.body.style.overflow = "hidden";
+      }} />
 
       {/* Trust Bar */}
       <div className="trust-bar">
@@ -207,7 +181,7 @@ export default function Home() {
             </div>
             <div className="about-image scroll-anim fade-in-right">
               <div className="img-wrapper glass-effect">
-                <Image src={pahalgamImg} alt="Pahalgam Valley" placeholder="blur" style={{ width: "100%", height: "auto" }} />
+                <Image src={pahalgamImg} alt="Pahalgam Valley" placeholder="blur" sizes="(max-width: 768px) 100vw, 50vw" style={{ width: "100%", height: "auto" }} />
                 <div className="experience-badge">
                   <span className="number">10+</span>
                   <span className="text">Years of<br />Experience</span>
@@ -277,50 +251,45 @@ export default function Home() {
             <p>Choose from our handpicked tour packages designed for every kind of traveler.</p>
           </div>
           <div className="packages-grid" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 350px), 1fr))" }}>
-            <div className="package-card scroll-anim fade-in-up" style={{ transitionDelay: "0.1s" }}>
-              <div className="card-img">
-                <Image src={pahalgamImg} alt="Group Tour Pahalgam" placeholder="blur" style={{ width: "100%", height: "auto" }} />
-                <div className="price-tag">₹16,400 <span style={{ fontSize: "0.7rem", fontWeight: "400" }}>/person</span></div>
+            {loadingPackages ? (
+              <div style={{ textAlign: "center", gridColumn: "1 / -1", padding: "50px" }}>Loading packages...</div>
+            ) : packages.length === 0 ? (
+              <div style={{ textAlign: "center", gridColumn: "1 / -1", padding: "50px", fontSize: "1.2rem", color: "var(--text-muted)" }}>
+                No packages available
               </div>
-              <div className="card-content">
-                <div className="card-meta">
-                  <span><i className="far fa-clock"></i> 4 Nights / 5 Days</span>
-                  <span><i className="fas fa-users"></i> 30 Persons</span>
-                </div>
-                <h3>Premium Group Experience (30 Pax)</h3>
-                <p>Enjoy a luxurious stay at 4-star properties with dedicated meeting halls, local sightseeing, and all-inclusive meals.</p>
-                <div className="card-footer">
-                  <div className="rating">
-                    <strong>Total: ₹4,92,000</strong>
+            ) : (
+              packages.map((pkg, index) => {
+                // Alternate between the statically imported images
+                const staticImg = index % 2 === 0 ? pahalgamImg : gulmargSnowImg;
+                
+                return (
+                  <div className="package-card" style={{ transitionDelay: `${0.1 * (index + 1)}s`, opacity: 1, transform: "none" }} key={pkg.id}>
+                    <div className="card-img">
+                      <Image src={staticImg} alt={pkg.title} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" style={{ objectFit: "cover" }} placeholder="blur" />
+                      <div className="price-tag">{pkg.perPerson}</div>
+                    </div>
+                  <div className="card-content">
+                    <div className="card-meta">
+                      <span><i className="far fa-clock"></i> {pkg.duration}</span>
+                      <span><i className="fas fa-users"></i> {pkg.groupSize}</span>
+                    </div>
+                    <h3 style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden", textOverflow: "ellipsis", height: "auto" }}>{pkg.title}</h3>
+                    <p style={{ display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden", textOverflow: "ellipsis", margin: "10px 0", height: "auto" }}>
+                      {(pkg.features && pkg.features.length > 0) ? pkg.features[0] : "Explore our premium package."}
+                    </p>
+                    <div className="card-footer">
+                      <div className="rating">
+                        <strong>Total: {pkg.totalPrice}</strong>
+                      </div>
+                      <button className="btn-text view-package-btn" onClick={() => openPackage(pkg)}>
+                        View Details <i className="fas fa-arrow-right"></i>
+                      </button>
+                    </div>
+                    </div>
                   </div>
-                  <button className="btn-text view-package-btn" onClick={() => openPackage('package1')}>
-                    View Details <i className="fas fa-arrow-right"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-            <div className="package-card scroll-anim fade-in-up" style={{ transitionDelay: "0.2s" }}>
-              <div className="card-img">
-                <Image src={gulmargSnowImg} alt="Group Tour Gulmarg" placeholder="blur" style={{ width: "100%", height: "auto" }} />
-                <div className="price-tag">₹19,800 <span style={{ fontSize: "0.7rem", fontWeight: "400" }}>/person</span></div>
-              </div>
-              <div className="card-content">
-                <div className="card-meta">
-                  <span><i className="far fa-clock"></i> 4 Nights / 5 Days</span>
-                  <span><i className="fas fa-users"></i> 10 Persons</span>
-                </div>
-                <h3>Intimate Group Escape (10 Pax)</h3>
-                <p>A more private premium experience in 4-star properties, including serene Shikara rides and extensive local sightseeing.</p>
-                <div className="card-footer">
-                  <div className="rating">
-                    <strong>Total: ₹1,98,000</strong>
-                  </div>
-                  <button className="btn-text view-package-btn" onClick={() => openPackage('package2')}>
-                    View Details <i className="fas fa-arrow-right"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
+                );
+              })
+            )}
           </div>
         </div>
       </section>
@@ -371,28 +340,28 @@ export default function Home() {
             }}
           >
             <div className="gallery-item scroll-anim fade-in-up" style={{ height: "300px" }}>
-              <Image src={dalLakeImg} alt="Dal Lake" placeholder="blur" fill style={{ objectFit: "cover" }} />
+              <Image src={dalLakeImg} alt="Dal Lake" placeholder="blur" fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover" }} />
               <div className="gallery-overlay">
                 <i className="fas fa-search-plus"></i>
                 <span>Dal Lake, Srinagar</span>
               </div>
             </div>
             <div className="gallery-item scroll-anim fade-in-up" style={{ transitionDelay: "0.1s", height: "300px" }}>
-              <Image src={gulmargSnowImg} alt="Gulmarg" placeholder="blur" fill style={{ objectFit: "cover" }} />
+              <Image src={gulmargSnowImg} alt="Gulmarg" placeholder="blur" fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover" }} />
               <div className="gallery-overlay">
                 <i className="fas fa-search-plus"></i>
                 <span>Gulmarg Ski Resort</span>
               </div>
             </div>
             <div className="gallery-item scroll-anim fade-in-up" style={{ transitionDelay: "0.2s", height: "300px" }}>
-              <Image src={pahalgamImg} alt="Pahalgam" placeholder="blur" fill style={{ objectFit: "cover" }} />
+              <Image src={pahalgamImg} alt="Pahalgam" placeholder="blur" fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover" }} />
               <div className="gallery-overlay">
                 <i className="fas fa-search-plus"></i>
                 <span>Pahalgam Valley</span>
               </div>
             </div>
             <div className="gallery-item scroll-anim fade-in-up" style={{ transitionDelay: "0.3s", height: "300px" }}>
-              <Image src={sonmargImg} alt="Sonmarg" placeholder="blur" fill style={{ objectFit: "cover" }} />
+              <Image src={sonmargImg} alt="Sonmarg" placeholder="blur" fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover" }} />
               <div className="gallery-overlay">
                 <i className="fas fa-search-plus"></i>
                 <span>Sonmarg Glaciers</span>
@@ -413,68 +382,48 @@ export default function Home() {
             <h2 className="section-title">Plan Your <span>Trip</span></h2>
           </div>
           <div className="contact-grid">
-            <div className="contact-info scroll-anim fade-in-left">
-              <div className="info-item glass-effect">
-                <i className="fas fa-map-marker-alt"></i>
-                <div>
-                  <h4>Location</h4>
-                  <p>Boulevard Road, Dal Lake, Srinagar, Kashmir - 190001</p>
+            <div className="contact-info scroll-anim fade-in-up" style={{ gridColumn: '1 / -1', maxWidth: '800px', margin: '0 auto' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '20px' }}>
+                <div className="info-item glass-effect">
+                  <i className="fas fa-map-marker-alt"></i>
+                  <div>
+                    <h4>Location</h4>
+                    <p>Boulevard Road, Opp. Ghat No. 7, Dal Lake, Srinagar, J&K - 190001</p>
+                  </div>
+                </div>
+                <div className="info-item glass-effect">
+                  <i className="fas fa-envelope"></i>
+                  <div>
+                    <h4>Email Us</h4>
+                    <p>bravehearttourandtravel321@gmail.com</p>
+                  </div>
+                </div>
+                <div className="info-item glass-effect">
+                  <i className="fas fa-phone-alt"></i>
+                  <div>
+                    <h4>Call Us</h4>
+                    <p>+91 95960 41720<br />+91 95416 91319</p>
+                  </div>
                 </div>
               </div>
-              <div className="info-item glass-effect">
-                <i className="fas fa-envelope"></i>
-                <div>
-                  <h4>Email Us</h4>
-                  <p>bravehearttourandtravel321@gmail.com</p>
-                </div>
-              </div>
-              <div className="info-item glass-effect">
-                <i className="fas fa-phone-alt"></i>
-                <div>
-                  <h4>Call Us</h4>
-                  <p>+91 95960 41720<br />+91 95416 91319</p>
-                </div>
-              </div>
-              <div className="map-container glass-effect mt-4">
+              
+              <div className="map-container glass-effect mt-4" style={{ height: '400px' }}>
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d105658.62534676587!2d74.72146908537597!3d34.1066708608821!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38e185c82db9e3bb%3A0x6b4bf20db207d583!2sSrinagar%2C%20Jammu%20and%20Kashmir!5e0!3m2!1sen!2sin!4v1684323547842!5m2!1sen!2sin"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.123456789!2d74.838!3d34.085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDA1JzA2LjAiTiA3NMKwNTAnMTYuOCJF!5e0!3m2!1sen!2sin!4v1684323547842!5m2!1sen!2sin"
                   width="100%"
-                  height="250"
+                  height="100%"
                   style={{ border: 0 }}
                   allowFullScreen=""
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
               </div>
-            </div>
-            <div className="contact-form-container glass-effect scroll-anim fade-in-right">
-              <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
-                <h3>Send us a Message</h3>
-                <div className="form-group">
-                  <input type="text" placeholder="Your Name" required />
-                </div>
-                <div className="form-group">
-                  <input type="email" placeholder="Your Email" required />
-                </div>
-                <div className="form-group">
-                  <input type="tel" placeholder="Your Phone Number" required />
-                </div>
-                <div className="form-group">
-                  <select required defaultValue="">
-                    <option value="" disabled>Select a Package</option>
-                    <option value="winter">Winter Wonderland</option>
-                    <option value="srinagar">Srinagar Serenity</option>
-                    <option value="pahalgam">Valley of Shepherds</option>
-                    <option value="custom">Custom Itinerary</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <textarea rows="4" placeholder="Tell us about your requirements..." required></textarea>
-                </div>
-                <button type="submit" className="btn btn-primary btn-block">
-                  Send Request <i className="fas fa-paper-plane"></i>
-                </button>
-              </form>
+
+              <div style={{ textAlign: 'center', marginTop: '40px' }}>
+                <a href="https://wa.me/919596041720" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: '15px 40px', fontSize: '1.1rem' }}>
+                  <i className="fab fa-whatsapp"></i> Chat on WhatsApp
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -482,14 +431,25 @@ export default function Home() {
 
       <Footer />
 
-      <PackageModal
-        pkg={selectedPackage}
-        isOpen={isPackageModalOpen}
-        onClose={() => setPackageModalOpen(false)}
+      <PackageModal 
+        pkg={selectedPackage} 
+        isOpen={isPackageModalOpen} 
+        onClose={() => {
+          setPackageModalOpen(false);
+          document.body.style.overflow = "auto";
+        }} 
+        onBookNow={() => {
+          setPackageModalOpen(false);
+          setBookNowModalOpen(true);
+        }}
       />
-      <BookNowModal
-        isOpen={isBookNowModalOpen}
-        onClose={() => setBookNowModalOpen(false)}
+      
+      <BookNowModal 
+        isOpen={isBookNowModalOpen} 
+        onClose={() => {
+          setBookNowModalOpen(false);
+          document.body.style.overflow = "auto";
+        }} 
       />
     </>
   );
