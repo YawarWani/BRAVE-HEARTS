@@ -1,5 +1,7 @@
 import AdminLogin from "@/components/AdminLogin";
 import Link from "next/link";
+import Image from "next/image";
+import logoImg from "../../../public/logo/logo.png";
 
 export const metadata = {
   title: "Admin Login | Brave Hearts Tour & Travels",
@@ -12,7 +14,7 @@ export default function AdminLoginPage() {
       {/* Simple header for login page */}
       <header style={{ padding: "20px", borderBottom: "1px solid #eaeaea", display: "flex", justifyContent: "center" }}>
         <Link href="/" className="logo">
-          <img src="/logo/logo.png" alt="Brave Hearts Logo" style={{ height: "50px", width: "auto" }} />
+          <Image src={logoImg} alt="Brave Hearts Logo" style={{ height: "50px", width: "auto" }} placeholder="blur" />
         </Link>
       </header>
 

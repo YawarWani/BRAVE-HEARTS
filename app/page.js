@@ -5,6 +5,14 @@ import Hero from "../components/Hero";
 import Footer from "../components/Footer";
 import { PackageModal, BookNowModal } from "../components/PackageModal";
 import Link from "next/link";
+import Image from "next/image";
+import pahalgamImg from "../public/images/about_pahalgam_1776581424655.png";
+import gulmargSnowImg from "../public/images/gulmarg_snow_1776581444972.png";
+import heroKashmirImg from "../public/images/hero_kashmir_1776581409040.png";
+import gandolaImg from "../public/images/Gandola.jpg";
+import dalLakeImg from "../public/grid_images/Dal-lake.jpg";
+import sonmargImg from "../public/grid_images/sonmarg.jpg";
+import gurezImg from "../public/grid_images/Gurez.jpg";
 
 export default function Home() {
   const [selectedPackage, setSelectedPackage] = useState(null);
@@ -19,10 +27,10 @@ export default function Home() {
       totalPrice: "₹4,92,000",
       perPerson: "(₹16,400 per person)",
       images: [
-        "images/about_pahalgam_1776581424655.png",
-        "images/gulmarg_snow_1776581444972.png",
+        pahalgamImg,
+        gulmargSnowImg,
         "https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=800&q=80",
-        "images/Gandola.jpg"
+        gandolaImg
       ],
       features: [
         "15 Double Rooms in 4-Star Properties",
@@ -42,10 +50,10 @@ export default function Home() {
       totalPrice: "₹1,98,000",
       perPerson: "(₹19,800 per person)",
       images: [
-        "images/gulmarg_snow_1776581444972.png",
+        gulmargSnowImg,
         "https://images.unsplash.com/photo-1598091383021-15ddea10925d?auto=format&fit=crop&w=800&q=80",
-        "images/hero_kashmir_1776581409040.png",
-        "images/about_pahalgam_1776581424655.png"
+        heroKashmirImg,
+        pahalgamImg
       ],
       features: [
         "5 Double Rooms in 4-Star Properties",
@@ -200,7 +208,7 @@ export default function Home() {
             </div>
             <div className="about-image scroll-anim fade-in-right">
               <div className="img-wrapper glass-effect">
-                <img src="/images/about_pahalgam_1776581424655.png" alt="Pahalgam Valley" loading="lazy" />
+                <Image src={pahalgamImg} alt="Pahalgam Valley" placeholder="blur" style={{ width: "100%", height: "auto" }} />
                 <div className="experience-badge">
                   <span className="number">10+</span>
                   <span className="text">Years of<br />Experience</span>
@@ -272,7 +280,7 @@ export default function Home() {
           <div className="packages-grid" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 350px), 1fr))" }}>
             <div className="package-card scroll-anim fade-in-up" style={{ transitionDelay: "0.1s" }}>
               <div className="card-img">
-                <img src="/images/about_pahalgam_1776581424655.png" alt="Group Tour Pahalgam" loading="lazy" />
+                <Image src={pahalgamImg} alt="Group Tour Pahalgam" placeholder="blur" style={{ width: "100%", height: "auto" }} />
                 <div className="price-tag">₹16,400 <span style={{ fontSize: "0.7rem", fontWeight: "400" }}>/person</span></div>
               </div>
               <div className="card-content">
@@ -294,7 +302,7 @@ export default function Home() {
             </div>
             <div className="package-card scroll-anim fade-in-up" style={{ transitionDelay: "0.2s" }}>
               <div className="card-img">
-                <img src="/images/gulmarg_snow_1776581444972.png" alt="Group Tour Gulmarg" loading="lazy" />
+                <Image src={gulmargSnowImg} alt="Group Tour Gulmarg" placeholder="blur" style={{ width: "100%", height: "auto" }} />
                 <div className="price-tag">₹19,800 <span style={{ fontSize: "0.7rem", fontWeight: "400" }}>/person</span></div>
               </div>
               <div className="card-content">
@@ -356,42 +364,42 @@ export default function Home() {
           </div>
           <div className="gallery-masonry">
             <div className="gallery-item scroll-anim fade-in-up">
-              <img src="/grid_images/Dal-lake.jpg" alt="Dal Lake" loading="lazy" />
+              <Image src={dalLakeImg} alt="Dal Lake" placeholder="blur" style={{ width: "100%", height: "auto" }} />
               <div className="gallery-overlay">
                 <i className="fas fa-search-plus"></i>
                 <span>Dal Lake, Srinagar</span>
               </div>
             </div>
             <div className="gallery-item scroll-anim fade-in-up">
-              <img src="/images/gulmarg_snow_1776581444972.png" alt="Gulmarg" loading="lazy" />
+              <Image src={gulmargSnowImg} alt="Gulmarg" placeholder="blur" style={{ width: "100%", height: "auto" }} />
               <div className="gallery-overlay">
                 <i className="fas fa-search-plus"></i>
                 <span>Gulmarg Ski Resort</span>
               </div>
             </div>
             <div className="gallery-item scroll-anim fade-in-up">
-              <img src="/images/about_pahalgam_1776581424655.png" alt="Pahalgam" loading="lazy" />
+              <Image src={pahalgamImg} alt="Pahalgam" placeholder="blur" style={{ width: "100%", height: "auto" }} />
               <div className="gallery-overlay">
                 <i className="fas fa-search-plus"></i>
                 <span>Pahalgam Valley</span>
               </div>
             </div>
             <div className="gallery-item scroll-anim fade-in-up">
-              <img src="/grid_images/sonmarg.jpg" alt="Sonmarg" loading="lazy" />
+              <Image src={sonmargImg} alt="Sonmarg" placeholder="blur" style={{ width: "100%", height: "auto" }} />
               <div className="gallery-overlay">
                 <i className="fas fa-search-plus"></i>
                 <span>Sonmarg Glaciers</span>
               </div>
             </div>
             <div className="gallery-item scroll-anim fade-in-up">
-              <img src="/images/Gandola.jpg" alt="Gulmarg Gondola" loading="lazy" />
+              <Image src={gandolaImg} alt="Gulmarg Gondola" placeholder="blur" style={{ width: "100%", height: "auto" }} />
               <div className="gallery-overlay">
                 <i className="fas fa-search-plus"></i>
                 <span>Gulmarg Gondola</span>
               </div>
             </div>
             <div className="gallery-item scroll-anim fade-in-up">
-              <img src="/grid_images/Gurez.jpg" alt="Kashmir Beauty" loading="lazy" />
+              <Image src={gurezImg} alt="Kashmir Beauty" placeholder="blur" style={{ width: "100%", height: "auto" }} />
               <div className="gallery-overlay">
                 <i className="fas fa-search-plus"></i>
                 <span>Gurez Valley</span>

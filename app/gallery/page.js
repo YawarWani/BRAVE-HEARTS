@@ -2,6 +2,13 @@
 import { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import Image from "next/image";
+import gulmarg1 from "../../public/Gulmarg/pexels-imadclicks-10679349.jpg";
+import gulmarg2 from "../../public/Gulmarg/pexels-imadclicks-10679579.jpg";
+import gulmarg3 from "../../public/Gulmarg/pexels-imadclicks-15344120.jpg";
+import sonmarg1 from "../../public/Sonmarg/pexels-faiz-ul-mushtaq-449363837-19975733.jpg";
+import sonmarg2 from "../../public/Sonmarg/pexels-imadclicks-31204203.jpg";
+import sonmarg3 from "../../public/Sonmarg/pexels-imadclicks-35414086.jpg";
 
 export default function Gallery() {
   const [filter, setFilter] = useState("all");
@@ -204,23 +211,23 @@ export default function Gallery() {
             {/* Gulmarg Images */}
             {(filter === "all" || filter === "gulmarg") && (
               <>
-                <div className="gallery-item gulmarg show" onClick={() => openLightbox("/Gulmarg/pexels-imadclicks-10679349.jpg", "Gulmarg Beauty")}>
-                  <img src="/Gulmarg/pexels-imadclicks-10679349.jpg" alt="Gulmarg Landscape" loading="lazy" />
+                <div className="gallery-item gulmarg show" onClick={() => openLightbox(gulmarg1, "Gulmarg Beauty")}>
+                  <Image src={gulmarg1} alt="Gulmarg Landscape" placeholder="blur" style={{ width: "100%", height: "auto" }} />
                   <div className="gallery-overlay">
                     <i className="fas fa-search-plus"></i>
                     <span>Gulmarg Beauty</span>
                   </div>
                 </div>
-                <div className="gallery-item gulmarg show" onClick={() => openLightbox("/Gulmarg/pexels-imadclicks-10679579.jpg", "Snowy Peaks")}>
-                  <img src="/Gulmarg/pexels-imadclicks-10679579.jpg" alt="Gulmarg Snow" loading="lazy" />
+                <div className="gallery-item gulmarg show" onClick={() => openLightbox(gulmarg2, "Snowy Peaks")}>
+                  <Image src={gulmarg2} alt="Gulmarg Snow" placeholder="blur" style={{ width: "100%", height: "auto" }} />
                   <div className="gallery-overlay">
                     <i className="fas fa-search-plus"></i>
                     <span>Snowy Peaks</span>
                   </div>
                 </div>
                 {/* Adding a few more for representation */}
-                <div className="gallery-item gulmarg show" onClick={() => openLightbox("/Gulmarg/pexels-imadclicks-15344120.jpg", "Winter Wonderland")}>
-                  <img src="/Gulmarg/pexels-imadclicks-15344120.jpg" alt="Gulmarg Trees" loading="lazy" />
+                <div className="gallery-item gulmarg show" onClick={() => openLightbox(gulmarg3, "Winter Wonderland")}>
+                  <Image src={gulmarg3} alt="Gulmarg Trees" placeholder="blur" style={{ width: "100%", height: "auto" }} />
                   <div className="gallery-overlay">
                     <i className="fas fa-search-plus"></i>
                     <span>Winter Wonderland</span>
@@ -232,22 +239,22 @@ export default function Gallery() {
             {/* Sonmarg Images */}
             {(filter === "all" || filter === "sonmarg") && (
               <>
-                <div className="gallery-item sonmarg show" onClick={() => openLightbox("/Sonmarg/pexels-faiz-ul-mushtaq-449363837-19975733.jpg", "Meadow of Gold")}>
-                  <img src="/Sonmarg/pexels-faiz-ul-mushtaq-449363837-19975733.jpg" alt="Sonmarg" loading="lazy" />
+                <div className="gallery-item sonmarg show" onClick={() => openLightbox(sonmarg1, "Meadow of Gold")}>
+                  <Image src={sonmarg1} alt="Sonmarg" placeholder="blur" style={{ width: "100%", height: "auto" }} />
                   <div className="gallery-overlay">
                     <i className="fas fa-search-plus"></i>
                     <span>Meadow of Gold</span>
                   </div>
                 </div>
-                <div className="gallery-item sonmarg show" onClick={() => openLightbox("/Sonmarg/pexels-imadclicks-31204203.jpg", "Glacial Streams")}>
-                  <img src="/Sonmarg/pexels-imadclicks-31204203.jpg" alt="Sonmarg" loading="lazy" />
+                <div className="gallery-item sonmarg show" onClick={() => openLightbox(sonmarg2, "Glacial Streams")}>
+                  <Image src={sonmarg2} alt="Sonmarg" placeholder="blur" style={{ width: "100%", height: "auto" }} />
                   <div className="gallery-overlay">
                     <i className="fas fa-search-plus"></i>
                     <span>Glacial Streams</span>
                   </div>
                 </div>
-                <div className="gallery-item sonmarg show" onClick={() => openLightbox("/Sonmarg/pexels-imadclicks-35414086.jpg", "Mountain Echoes")}>
-                  <img src="/Sonmarg/pexels-imadclicks-35414086.jpg" alt="Sonmarg" loading="lazy" />
+                <div className="gallery-item sonmarg show" onClick={() => openLightbox(sonmarg3, "Mountain Echoes")}>
+                  <Image src={sonmarg3} alt="Sonmarg" placeholder="blur" style={{ width: "100%", height: "auto" }} />
                   <div className="gallery-overlay">
                     <i className="fas fa-search-plus"></i>
                     <span>Mountain Echoes</span>
@@ -269,7 +276,7 @@ export default function Gallery() {
                   <div className="quote-icon" style={{ position: "absolute", top: "15px", left: "15px", fontSize: "2rem", opacity: "0.2" }}><i className="fas fa-quote-left"></i></div>
                   <p className="review-text" style={{ marginBottom: "20px", fontSize: "1rem" }}>"An absolutely magical experience! The snow-covered peaks and the thrilling Gulmarg gondola ride were unforgettable. Best trip ever!"</p>
                   <div className="client-info" style={{ display: "flex", alignItems: "center", justifyContent: "flex-start", gap: "15px" }}>
-                    <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80" alt="Zahoor Ahmed" className="client-img" style={{ width: "50px", height: "50px", borderRadius: "50%" }} />
+                    <Image src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80" alt="Zahoor Ahmed" className="client-img" width={50} height={50} style={{ borderRadius: "50%" }} />
                     <div className="client-details">
                       <h4 style={{ fontSize: "1rem", marginBottom: "2px" }}>Zahoor Ahmed</h4>
                       <div className="rating" style={{ fontSize: "0.8rem", color: "#F59E0B" }}>
@@ -294,7 +301,7 @@ export default function Gallery() {
                   <div className="quote-icon" style={{ position: "absolute", top: "15px", left: "15px", fontSize: "2rem", opacity: "0.2" }}><i className="fas fa-quote-left"></i></div>
                   <p className="review-text" style={{ marginBottom: "20px", fontSize: "1rem" }}>"Kashmir truly is paradise on earth, and Sonmarg is its golden crown. The local guides were knowledgeable and polite."</p>
                   <div className="client-info" style={{ display: "flex", alignItems: "center", justifyContent: "flex-start", gap: "15px" }}>
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Tariq Bhat" className="client-img" style={{ width: "50px", height: "50px", borderRadius: "50%" }} />
+                    <Image src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Tariq Bhat" className="client-img" width={50} height={50} style={{ borderRadius: "50%" }} />
                     <div className="client-details">
                       <h4 style={{ fontSize: "1rem", marginBottom: "2px" }}>Tariq Bhat</h4>
                       <div className="rating" style={{ fontSize: "0.8rem", color: "#F59E0B" }}>
@@ -316,7 +323,9 @@ export default function Gallery() {
       {lightboxOpen && (
         <div id="lightbox" className="lightbox" style={{ display: "block" }} onClick={closeLightbox}>
           <span className="close-lightbox" onClick={closeLightbox}>&times;</span>
-          <img className="lightbox-content" src={lightboxImg} alt="Lightbox View" onClick={(e) => e.stopPropagation()} />
+          {lightboxImg && (
+             <Image className="lightbox-content" src={lightboxImg} alt="Lightbox View" onClick={(e) => e.stopPropagation()} style={{ maxWidth: "90%", maxHeight: "80vh", width: "auto", height: "auto" }} />
+          )}
           <div id="lightbox-caption">{lightboxCaption}</div>
         </div>
       )}

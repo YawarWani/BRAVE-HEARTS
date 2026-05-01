@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
+import logoImg from "../public/logo/logo.png";
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -74,10 +76,11 @@ export default function Navbar() {
       <nav id="navbar" className={`navbar ${scrolled || pathname === '/gallery' ? "scrolled" : ""}`}>
         <div className="nav-container">
           <Link href="/" className="logo">
-            <img
-              src="/logo/logo.png"
+            <Image
+              src={logoImg}
               alt="Brave Hearts Logo"
               style={{ height: "80px", width: "auto", display: "block" }}
+              placeholder="blur"
             />
           </Link>
 

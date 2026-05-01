@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 
 // We will export a few modals from this file that were previously in index.html
 
@@ -19,12 +20,12 @@ export function PackageModal({ pkg, isOpen, onClose }) {
         <span className="close-modal" onClick={onClose}>&times;</span>
         <div className="modal-body">
           <div className="modal-slider-container">
-            <img src={pkg.images[0]} alt="Package View" />
+            <Image src={pkg.images[0]} alt="Package View" fill style={{ objectFit: "cover", transition: "opacity 0.5s ease" }} />
             <button className="slider-btn prev-btn"><i className="fas fa-chevron-left"></i></button>
             <button className="slider-btn next-btn"><i className="fas fa-chevron-right"></i></button>
             <div className="modal-thumbnails">
               {pkg.images.map((img, idx) => (
-                <img key={idx} src={img} className={idx === 0 ? "active" : ""} alt="Thumbnail" />
+                <Image key={idx} src={img} className={idx === 0 ? "active" : ""} alt="Thumbnail" width={50} height={50} style={{ objectFit: "cover" }} />
               ))}
             </div>
           </div>

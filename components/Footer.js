@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import logoImg from "../public/logo/logo.png";
 
 export default function Footer() {
   const [currentYear, setCurrentYear] = useState("");
@@ -15,7 +17,7 @@ export default function Footer() {
         <div className="footer-grid">
           <div className="footer-about">
             <Link href="/" className="logo footer-logo">
-              <img src="/logo/logo.png" alt="Brave Hearts Logo" style={{ height: "50px", width: "auto" }} />
+              <Image src={logoImg} alt="Brave Hearts Logo" style={{ height: "50px", width: "auto" }} placeholder="blur" />
             </Link>
             <p>
               Your ultimate companion in exploring the breathtaking beauty of Kashmir. We provide premium, luxurious, and hassle-free travel experiences.
