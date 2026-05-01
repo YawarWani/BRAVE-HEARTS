@@ -1,15 +1,21 @@
 "use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
+import hero1 from "../public/hero_images/1.jpg";
+import hero2 from "../public/hero_images/2.jpg";
+import hero3 from "../public/hero_images/3.jpg";
+import hero4 from "../public/hero_images/4.jpg";
+import hero5 from "../public/hero_images/5.jpg";
 
 export default function Hero() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [
-    "hero_images/1.jpg",
-    "hero_images/2.jpg",
-    "hero_images/3.jpg",
-    "hero_images/4.jpg",
-    "hero_images/5.jpg"
+    hero1,
+    hero2,
+    hero3,
+    hero4,
+    hero5
   ];
 
   useEffect(() => {
@@ -24,10 +30,11 @@ export default function Hero() {
       <div className="hero-bg" id="heroBgSlider">
         {slides.map((slide, index) => (
           <div
-            key={slide}
+            key={index}
             className={`hero-slide ${index === currentSlide ? "active" : ""}`}
-            style={{ backgroundImage: `url('${slide}')` }}
-          ></div>
+          >
+            <Image src={slide} alt={`Hero Image ${index + 1}`} fill style={{ objectFit: "cover" }} priority={index === 0} placeholder="blur" />
+          </div>
         ))}
         <div className="overlay"></div>
       </div>

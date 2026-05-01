@@ -327,7 +327,8 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="stats section-padding parallax">
+      <section className="stats section-padding parallax" style={{ overflow: "hidden" }}>
+        <Image src={heroKashmirImg} alt="Stats Background" fill style={{ objectFit: "cover", zIndex: -1 }} placeholder="blur" />
         <div className="stats-overlay"></div>
         <div className="container relative">
           <div className="stats-grid">

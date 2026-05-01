@@ -839,7 +839,7 @@ img {
    ========================================================================== */
 .stats {
     position: relative;
-    background-image: url('/images/hero_kashmir_1776581409040.png');
+    /* background-image removed for next/image */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
