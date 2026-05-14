@@ -15,10 +15,31 @@ const outfit = Outfit({
 });
 
 export const metadata = {
+  metadataBase: new URL('https://bravehearttourandtravel.com'),
   title: "Brave Hearts Tour & Travels | Explore Paradise on Earth",
-  description: "Discover the natural beauty of Kashmir with Brave Hearts Tour & Travels. We offer premium, luxurious, and unforgettable tour packages.",
-  icons: {
-    icon: '/fav/fav.png',
+  description: "Discover the natural beauty of Kashmir with Brave Hearts Tour & Travels. We offer premium, luxurious, and unforgettable tour packages to Kashmir, Dal Lake, Gulmarg, and Pahalgam.",
+  keywords: ["Kashmir tour packages", "Srinagar tourism", "Gulmarg snow", "Pahalgam tour", "Dal lake houseboat", "best travel agency in Kashmir", "Brave Hearts Tour & Travels", "Kashmir holiday", "Jammu and Kashmir tourism"],
+  openGraph: {
+    title: "Brave Hearts Tour & Travels | Explore Paradise on Earth",
+    description: "Discover the natural beauty of Kashmir with Brave Hearts Tour & Travels. We offer premium, luxurious, and unforgettable tour packages.",
+    url: "https://bravehearttourandtravel.com",
+    siteName: "Brave Hearts Tour & Travels",
+    images: [
+      {
+        url: "/logo/logo.png",
+        width: 800,
+        height: 600,
+        alt: "Brave Hearts Tour & Travels Logo",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Brave Hearts Tour & Travels | Explore Paradise on Earth",
+    description: "Discover the natural beauty of Kashmir with Brave Hearts Tour & Travels. We offer premium, luxurious, and unforgettable tour packages.",
+    images: ["/logo/logo.png"],
   }
 };
 

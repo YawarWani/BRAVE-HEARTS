@@ -28,13 +28,6 @@ export function PackageModal({ pkg, isOpen, onClose, onBookNow }) {
         <div className="modal-body">
           <div className="modal-slider-container">
             <Image src={staticImages[0]} alt="Package View" fill sizes="(max-width: 768px) 100vw, 50vw" style={{ objectFit: "cover", transition: "opacity 0.5s ease" }} />
-            <button className="slider-btn prev-btn"><i className="fas fa-chevron-left"></i></button>
-            <button className="slider-btn next-btn"><i className="fas fa-chevron-right"></i></button>
-            <div className="modal-thumbnails">
-              {staticImages.map((img, idx) => (
-                <Image key={idx} src={img} className={idx === 0 ? "active" : ""} alt="Thumbnail" width={50} height={50} style={{ objectFit: "cover" }} />
-              ))}
-            </div>
           </div>
           <div className="modal-details">
             <h2>{pkg.title}</h2>

@@ -369,7 +369,7 @@ export default function Home() {
             </div>
           </div>
           <div className="text-center" style={{ marginTop: "50px" }}>
-            <Link href="/gallery" className="btn btn-primary">View Full Gallery</Link>
+            {/* <Link href="/gallery" className="btn btn-primary">View Full Gallery</Link> */}
           </div>
         </div>
       </section>
