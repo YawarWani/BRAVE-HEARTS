@@ -66,7 +66,7 @@ export default function Navbar() {
   const isActive = (path) => {
     // Basic active state logic. In the original, it used scroll spy, 
     // but for Next.js, matching pathname or hash is safer for links.
-    if (path === "/gallery" && pathname === "/gallery") return "active";
+    // if (path === "/gallery" && pathname === "/gallery") return "active";
     if (pathname === "/" && path.startsWith("/#")) return ""; // Handled by scroll spy later or just let it be
     return "";
   };
@@ -116,7 +116,7 @@ export default function Navbar() {
             <li><Link href="/#about" className={`nav-link`} onClick={closeMenu}>About</Link></li>
             <li><Link href="/#services" className={`nav-link`} onClick={closeMenu}>Services</Link></li>
             <li><Link href="/#packages" className={`nav-link`} onClick={closeMenu}>Packages</Link></li>
-            <li><Link href="/gallery" className={`nav-link ${pathname === '/gallery' ? 'active' : ''}`} onClick={closeMenu}>Gallery</Link></li>
+            {/* <li><Link href="/gallery" className={`nav-link ${pathname === '/gallery' ? 'active' : ''}`} onClick={closeMenu}>Gallery</Link></li> */}
           </ul>
         </div>
       </nav>

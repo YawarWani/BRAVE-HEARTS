@@ -7,12 +7,6 @@ export default function sitemap() {
       priority: 1,
     },
     {
-      url: 'https://bravehearttourandtravel.com/gallery',
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
       url: 'https://bravehearttourandtravel.com/admin',
       lastModified: new Date(),
       changeFrequency: 'monthly',
