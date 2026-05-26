@@ -92,7 +92,7 @@ export default function Navbar() {
               <a href="https://www.facebook.com/profile.php?id=61568945112556" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-facebook-f"></i>
               </a>
-              <a href="https://wa.me/919596041720" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/917006467747" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-whatsapp"></i>
               </a>
             </div>

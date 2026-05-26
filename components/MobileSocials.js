@@ -33,7 +33,7 @@ export default function MobileSocials() {
       <a href="https://x.com/heart12385" className="mobile-social-tip tip-right-1" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
         <i className="fab fa-twitter"></i>
       </a>
-      <a href="https://wa.me/919596041720" className="mobile-social-tip tip-right-2" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+      <a href="https://wa.me/917006467747" className="mobile-social-tip tip-right-2" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
         <i className="fab fa-whatsapp"></i>
       </a>
     </div>

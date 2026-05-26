@@ -55,7 +55,7 @@ export default function Hero({ onPlanMyTrip }) {
             >
               Plan My Trip
             </button>
-            <a href="tel:+919596041720" className="btn btn-outline">
+            <a href="tel:+917006467747" className="btn btn-outline">
               Let's Talk <i className="fas fa-phone-alt"></i>
             </a>
           </div>

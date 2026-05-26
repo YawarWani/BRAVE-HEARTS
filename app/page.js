@@ -402,14 +402,14 @@ export default function Home() {
                   <i className="fas fa-phone-alt"></i>
                   <div>
                     <h4>Call Us</h4>
-                    <p>+91 95960 41720<br />+91 95416 91319</p>
+                    <p>+91 70064 67747</p>
                   </div>
                 </div>
               </div>
               
               <div className="map-container glass-effect mt-4" style={{ height: '400px' }}>
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.123456789!2d74.838!3d34.085!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzTCsDA1JzA2LjAiTiA3NMKwNTAnMTYuOCJF!5e0!3m2!1sen!2sin!4v1684323547842!5m2!1sen!2sin"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3305.6754329!2d74.8982239!3d34.1669461!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38e18709b6a1a519%3A0x5fe12b33d9ecadf4!2sBrave%20heart%20tour%20and%20travel!5e0!3m2!1sen!2sin!4v1716000000000!5m2!1sen!2sin"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -420,7 +420,7 @@ export default function Home() {
               </div>
 
               <div style={{ textAlign: 'center', marginTop: '40px' }}>
-                <a href="https://wa.me/919596041720" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: '15px 40px', fontSize: '1.1rem' }}>
+                <a href="https://wa.me/917006467747" target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ padding: '15px 40px', fontSize: '1.1rem' }}>
                   <i className="fab fa-whatsapp"></i> Chat on WhatsApp
                 </a>
               </div>
