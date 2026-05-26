@@ -168,7 +168,7 @@ export default function Home() {
             <div className="about-text scroll-anim fade-in-left">
               <h2 className="section-title">Discover the Magic of <span>Kashmir</span></h2>
               <p className="lead-text">
-                Brave Hearts Tour & Travels is an officially recognized and trusted Excursion Agent, proudly registered with the Department of Tourism, Government of Jammu and Kashmir (Reg: <span style={{ color: "var(--primary)", fontWeight: "700", background: "rgba(15, 118, 110, 0.1)", padding: "2px 6px", borderRadius: "4px" }}>JKEA00004318</span>).
+                Brave Heart Tour & Travels is an officially recognized and trusted Excursion Agent, proudly registered with the Department of Tourism, Government of Jammu and Kashmir (Reg: <span style={{ color: "var(--primary)", fontWeight: "700", background: "rgba(15, 118, 110, 0.1)", padding: "2px 6px", borderRadius: "4px" }}>JKEA00004318</span>).
               </p>
               <p>With years of experience in curating premium travel experiences, we believe in creating memories that last a lifetime. Whether you seek the serene waters of Dal Lake, the snow-capped peaks of Gulmarg, or the lush green meadows of Pahalgam, we provide luxurious, comfortable, and unforgettable journeys.</p>
               <ul className="about-features">

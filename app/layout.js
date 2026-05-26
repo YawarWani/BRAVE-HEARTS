@@ -17,7 +17,7 @@ const outfit = Outfit({
 import { Metadata } from "next";
 
 const BASE_URL = "https://bravehearttourandtravel.com";
-const SITE_NAME = "Brave Hearts Tour & Travels";
+const SITE_NAME = "Brave Heart Tour & Travels";
 // const OG_IMAGE = "/og/kashmir-hero.jpg"; // ⚠️ Uncomment and replace with a 1200×630 Kashmir landscape image
 
 export const metadata = {
@@ -26,7 +26,7 @@ export const metadata = {
   // ── Core SEO ──────────────────────────────────────────────────────────────
   title: `${SITE_NAME} | Kashmir Tour Packages & Holiday Deals`,
   description:
-    "Book premium Kashmir tour packages with Brave Hearts Tour & Travels. Explore Dal Lake houseboats, Gulmarg ski slopes, Pahalgam valleys & Srinagar gardens. Best prices guaranteed.",
+    "Book premium Kashmir tour packages with Brave Heart Tour & Travels. Explore Dal Lake houseboats, Gulmarg ski slopes, Pahalgam valleys & Srinagar gardens. Best prices guaranteed.",
   keywords: [
     "Kashmir tour packages",
     "Kashmir holiday packages",
@@ -38,7 +38,7 @@ export const metadata = {
     "Jammu Kashmir tourism",
     "Kashmir honeymoon packages",
     "Kashmir family tour",
-    "Brave Hearts Tour and Travels",
+    "Brave Heart Tour and Travels",
     "luxury Kashmir holiday",
   ],
 
@@ -77,7 +77,7 @@ export const metadata = {
     //     url: OG_IMAGE,
     //     width: 1200,
     //     height: 630,
-    //     alt: "Scenic view of Dal Lake, Kashmir — Brave Hearts Tour & Travels",
+    //     alt: "Scenic view of Dal Lake, Kashmir — Brave Heart Tour & Travels",
     //   },
     // ],
     locale: "en_US",
@@ -89,7 +89,7 @@ export const metadata = {
     card: "summary_large_image",
     title: `${SITE_NAME} | Kashmir Tour Packages`,
     description:
-      "Discover Kashmir's paradise with Brave Hearts. Houseboats, snow, valleys & more — all in one package.",
+      "Discover Kashmir's paradise with Brave Heart. Houseboats, snow, valleys & more — all in one package.",
     site: "@heart12385",
     creator: "@heart12385",
     // images: [OG_IMAGE],

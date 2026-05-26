@@ -17,7 +17,7 @@ export default function Footer() {
         <div className="footer-grid">
           <div className="footer-about">
             <Link href="/" className="logo footer-logo">
-              <Image src={logoImg} alt="Brave Hearts Logo" style={{ height: "50px", width: "auto" }} placeholder="blur" />
+              <Image src={logoImg} alt="Brave Heart Logo" style={{ height: "50px", width: "auto" }} placeholder="blur" />
             </Link>
             <p>
               Your ultimate companion in exploring the breathtaking beauty of Kashmir. We provide premium, luxurious, and hassle-free travel experiences.
@@ -68,7 +68,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; <span>{currentYear}</span> Brave Hearts Tour & Travels. All Rights Reserved.</p>
+          <p>&copy; <span>{currentYear}</span> Brave Heart Tour & Travels. All Rights Reserved.</p>
           <p>Designed with <i className="fas fa-heart" style={{ color: "#e74c3c" }}></i> for Kashmir.</p>
           <div style={{ marginTop: "15px" }}>
             <Link href="/admin/login" style={{ color: "rgba(255,255,255,0.3)", fontSize: "0.8rem", textDecoration: "none", transition: "color 0.3s" }} onMouseOver={(e) => e.target.style.color = "var(--primary-light)"} onMouseOut={(e) => e.target.style.color = "rgba(255,255,255,0.3)"}>

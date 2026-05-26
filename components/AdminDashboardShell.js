@@ -21,7 +21,7 @@ export default function AdminDashboardShell({ username }) {
       <aside className="admin-sidebar" aria-label="Admin navigation">
         <div className="sidebar-brand">
           <i className="fas fa-compass"></i>
-          <span>Brave Hearts</span>
+          <span>Brave Heart</span>
           <button
             type="button"
             className="admin-sidebar-close"
@@ -70,7 +70,7 @@ export default function AdminDashboardShell({ username }) {
           </button>
           <div>
             <span className="mobile-kicker">Admin</span>
-            <strong>Brave Hearts</strong>
+            <strong>Brave Heart</strong>
           </div>
         </header>
 

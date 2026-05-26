@@ -64,7 +64,7 @@ export default function AdminLogin() {
             </svg>
           </div>
 
-          <h1 className="brand-name">Brave Hearts</h1>
+          <h1 className="brand-name">Brave Heart</h1>
           <p className="brand-tagline">Tour & Travel</p>
 
           <div className="divider" />

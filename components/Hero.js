@@ -42,7 +42,7 @@ export default function Hero({ onPlanMyTrip }) {
         <h1 className="hero-title">
           Explore <span className="text-highlight">Paradise</span> on Earth
         </h1>
-        <p className="hero-tagline typewriter">Welcome to Brave Hearts Tour & Travels</p>
+        <p className="hero-tagline typewriter">Welcome to Brave Heart Tour & Travels</p>
         <div className="hero-btns">
           <Link href="/#packages" className="btn btn-primary">
             <i className="fas fa-globe-asia"></i> Explore Packages

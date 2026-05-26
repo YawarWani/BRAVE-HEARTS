@@ -78,7 +78,7 @@ export default function Navbar() {
           <Link href="/" className="logo">
             <Image
               src={logoImg}
-              alt="Brave Hearts Logo"
+              alt="Brave Heart Logo"
               style={{ height: "80px", width: "auto", display: "block" }}
               placeholder="blur"
             />
